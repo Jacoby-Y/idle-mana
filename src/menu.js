@@ -23,7 +23,8 @@ const set_points = (i=points.length-1)=>{
             y: window.innerHeight/2-10
         }
         const d = window.innerHeight/4;
-        const a = (Math.PI / points.length) * i+((Math.PI/(points.length))-(Math.PI/(points.length*2))); 
+        const sq = 0.5;
+        const a = (((Math.PI / points.length)*sq) * i+((Math.PI/(points.length))-(Math.PI/(points.length*2)))) + sq+0.08; 
         const x = Math.cos(a-(Math.PI/2))*d;
         const y = Math.sin(a-(Math.PI/2))*d;
 

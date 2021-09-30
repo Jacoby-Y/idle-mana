@@ -31,7 +31,7 @@ const set_tip = (txt)=>{
         tip_txt.innerText = txt;
     }
 }
-const toggle_tip = (bool)=>{
+const toggle_tip = (bool=false)=>{
     if (bool) {
         tip.style.transform = "translate(0, 0)";
     } else {

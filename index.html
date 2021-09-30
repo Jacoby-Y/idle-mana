@@ -18,8 +18,8 @@
     <div id="circ-menu"></div>
     <div id="menu-btn"></div>
     <div class="point"> <h2 class="menu-txt">Extra</h2> </div>
-    <div class="point"> <h2 class="menu-txt">Prestige</h2> </div>
-    <div class="point"> <h2 class="menu-txt">Minions</h2> </div>
+    <div class="point"> <h2 class="menu-txt" onclick="load_menu('prestige-temp')">Prestige</h2> </div>
+    <div class="point"> <h2 class="menu-txt" onclick="load_menu('minion-temp')">Minions</h2> </div>
     <div class="point"> <h2 class="menu-txt" onclick="load_menu('upgrade-temp')">Upgrades</h2> </div>
     <div id="poppup-wrapper"></div>
     <div id="tip"><h3 id="tip-txt">Default</h3></div>
@@ -28,8 +28,25 @@
         <div id="poppup-content" style="padding: 10px; width: auto;">
             <h2 style="color: white; text-align: center; padding: 0.5rem 0.5rem 1.2rem 0.5rem;">-- Upgrades --</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <img class="btn-t1" onmouseenter="set_tip('#0')" onmouseleave="toggle_tip(false)" src="./assets/power1.svg">
-                <img class="btn-t1" onmouseenter="set_tip('#1')" onmouseleave="toggle_tip(false)" src="./assets/power2.svg">
+                <img class="btn-t1" onmouseenter="set_tip('#0')" onmouseleave="toggle_tip()" src="./assets/power1.svg">
+                <img class="btn-t1" onmouseenter="set_tip('#1')" onmouseleave="toggle_tip()" src="./assets/power2.svg">
+            </div>
+        </div>
+    </template>
+    <template id="minion-temp">
+        <div id="poppup-content" style="padding: 10px; width: auto;">
+            <h2 style="color: white; text-align: center; padding: 0.5rem 0.5rem 1.2rem 0.5rem;">-- Minions --</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <img class="btn-t1" onmouseenter="set_tip('Summon a zombie to help!')" onmouseleave="toggle_tip()" src="./assets/minion1.svg">
+                <img class="btn-t1" onmouseenter="set_tip('Summon aquatic reinforcements!')" onmouseleave="toggle_tip()" src="./assets/minion2.svg">
+            </div>
+        </div>
+    </template>
+    <template id="prestige-temp">
+        <div id="poppup-content" style="padding: 10px; width: auto;">
+            <h2 style="color: white; text-align: center; padding: 0.5rem 0.5rem 1.2rem 0.5rem;">-- Prestige --</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <img class="btn-t1" onmouseenter="set_tip('Feel the power')" onmouseleave="toggle_tip()" src="./assets/prestige1.svg">
             </div>
         </div>
     </template>
