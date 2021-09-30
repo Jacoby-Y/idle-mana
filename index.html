@@ -3,7 +3,9 @@
 <head>
     <script src="./lib/identi.js"></script>
     <script defer src="./src/main.js"></script>
-    <script defer src="./src/events.js"></script>
+    <script defer src="./src/mana_orb.js"></script>
+    <script defer src="./src/menu.js"></script>
+    <script defer src="./src/poppup.js"></script>
     <link rel="stylesheet" href="./style.css">
     <title>Document</title>
 </head>
@@ -13,5 +15,23 @@
     <div id="holding-wrapper">
         <div id="holding-bar"></div>
     </div>
+    <div id="circ-menu"></div>
+    <div id="menu-btn"></div>
+    <div class="point"> <h2 class="menu-txt">Extra</h2> </div>
+    <div class="point"> <h2 class="menu-txt">Prestige</h2> </div>
+    <div class="point"> <h2 class="menu-txt">Minions</h2> </div>
+    <div class="point"> <h2 class="menu-txt" onclick="load_menu('upgrade-temp')">Upgrades</h2> </div>
+    <div id="poppup-wrapper"></div>
+    <div id="tip"><h3 id="tip-txt">Default</h3></div>
+    
+    <template id="upgrade-temp">
+        <div id="poppup-content" style="padding: 10px; width: auto;">
+            <h2 style="color: white; text-align: center; padding: 0.5rem 0.5rem 1.2rem 0.5rem;">-- Upgrades --</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <img class="btn-t1" onmouseenter="set_tip('#0')" onmouseleave="toggle_tip(false)" src="./assets/power1.svg">
+                <img class="btn-t1" onmouseenter="set_tip('#1')" onmouseleave="toggle_tip(false)" src="./assets/power2.svg">
+            </div>
+        </div>
+    </template>
 </body>
 </html>
