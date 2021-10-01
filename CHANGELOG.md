@@ -1,3 +1,9 @@
+# 0.3.1
+- Fixed up prestige button
+- Added 'TODO.md'
+- Visual indication for when (mana >= max_mana)
+- started on making the foundation for minions
+
 # 0.3
 - Populated assets folder
 - More code destructuring 

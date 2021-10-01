@@ -11,7 +11,9 @@
     <script defer src="./src/menus/upgrades.js"></script>
     <script defer src="./src/menus/minions.js"></script>
     <script defer src="./src/menus/spells.js"></script>
+    <script defer src="./src/menus/prestige.js"></script>
 
+    <script defer src="./src/minion.js"></script>
     <script defer src="./src/events.js"></script>
     <link rel="stylesheet" href="./style.css">
     <title>Mana Idler!</title>
@@ -72,7 +74,7 @@
         <div id="poppup-content" style="padding: 10px; width: auto;">
             <h2 style="color: white; text-align: center; padding: 0.5rem 0.5rem 1.2rem 0.5rem;">-- Prestige --</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <img class="btn-t1" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" src="./assets/prestige0.svg">
+                <div class="btn-t1" onclick="clicked_btn('prest')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/prestige0.svg);"><h3 class="btn-t1-lvl" watch>{prest}</h3><h3 class="btn-t1-cost" watch>{prest_cost}</h3></div>
             </div>
         </div>
     </template>

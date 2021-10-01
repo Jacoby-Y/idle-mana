@@ -8,24 +8,38 @@
     minion5 = Dragon
 */
 
+const minion_len = 6;
+
 data.minion0 = get_or("minion0", 0);
 data.minion0_cost = get_or("minion0_cost", 50);
 data.minion0_lvl = get_or("minion0_lvl", 0);
+data.minion0_pow = get_or("minion0_lvl", 1);
+
 data.minion1 = get_or("minion1", 0);
 data.minion1_cost = get_or("minion1_cost", 200);
 data.minion1_lvl = get_or("minion1_lvl", 0);
+data.minion1_pow = get_or("minion1_lvl", 2);
+
 data.minion2 = get_or("minion2", 0);
 data.minion2_cost = get_or("minion2_cost", 200);
 data.minion2_lvl = get_or("minion2_lvl", 0);
+data.minion2_pow = get_or("minion2_lvl", 5);
+
 data.minion3 = get_or("minion3", 0);
 data.minion3_cost = get_or("minion3_cost", 200);
 data.minion3_lvl = get_or("minion3_lvl", 0);
+data.minion3_pow = get_or("minion3_lvl", 8);
+
 data.minion4 = get_or("minion4", 0);
 data.minion4_cost = get_or("minion4_cost", 200);
 data.minion4_lvl = get_or("minion4_lvl", 0);
+data.minion4_pow = get_or("minion4_lvl", 15);
+
 data.minion5 = get_or("minion5", 0);
 data.minion5_cost = get_or("minion5_cost", 200);
 data.minion5_lvl = get_or("minion5_lvl", 0);
+data.minion5_pow = get_or("minion5_lvl", 20);
+
 
 
 menu_funcs.minion0_click = ()=>{
