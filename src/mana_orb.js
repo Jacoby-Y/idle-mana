@@ -11,20 +11,9 @@ let hold_idle = false;
 let idle_speed = 500;
 let block_idle = false;
 
-const upd_mana_txt = ()=>mana_txt.innerText = `Mana: ${mana} / ${max_mana}`; upd_mana_txt();
-const incre_mana = (num=1)=>{ 
-    if (mana+num > max_mana) {
-        mana = max_mana;
-    }
-    else {
-        mana += num;
-    }
-    upd_mana_txt();
-}
-
 mana_orb.onmousedown = ()=>{
-    incre_mana();
     mouse.holding_orb = true;
+    data.mana++;
     mouse.when_down = Date.now();
     setTimeout(() => {
         // console.log("mana_orb mousedown, timeout");
@@ -54,7 +43,7 @@ const run_idle_bar = ()=>{
         // console.log("run_idle_bar, timed out");
         holding_bar.style.transitionDuration = "0s";
         holding_bar.style.width = "20%";
-        incre_mana();
+        data.mana++;
         if (mouse.holding_orb) {
             setTimeout(() => { run_idle_bar() }, 50);
         }

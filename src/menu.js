@@ -24,9 +24,10 @@ const set_points = (i=points.length-1)=>{
         }
         const d = window.innerHeight/4;
         const sq = 0.5;
-        const a = (((Math.PI / points.length)*sq) * i+((Math.PI/(points.length))-(Math.PI/(points.length*2)))) + sq+0.08; 
-        const x = Math.cos(a-(Math.PI/2))*d;
-        const y = Math.sin(a-(Math.PI/2))*d;
+        const off = 2;
+        const a = ((off / points.length) * i+((off/(points.length))-(off/(points.length*2)))); 
+        const x = Math.cos(a-(off/2))*d;
+        const y = Math.sin(a-(off/2))*d;
 
         points[i].style.left = `${o.x-x}px`;
         points[i].style.top = `${o.y-y}px`;

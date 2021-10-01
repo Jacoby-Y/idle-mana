@@ -2,23 +2,26 @@
 <html lang="en">
 <head>
     <script src="./lib/identi.js"></script>
+    <script src="./lib/watcher.js"></script>
     <script defer src="./src/main.js"></script>
     <script defer src="./src/mana_orb.js"></script>
     <script defer src="./src/menu.js"></script>
+    <script defer src="./src/poppup_data.js"></script>
     <script defer src="./src/poppup.js"></script>
+    <script defer src="./src/events.js"></script>
     <link rel="stylesheet" href="./style.css">
-    <title>Document</title>
+    <title>Mana Idler!</title>
 </head>
 <body>
-    <h3 id="mana-txt">Mana: 0</h3>
+    <h3 id="mana-txt" watch>Mana: {mana}</h3>
     <div id="mana-orb"></div>
     <div id="holding-wrapper">
         <div id="holding-bar"></div>
     </div>
     <div id="circ-menu"></div>
-    <div id="menu-btn"></div>
-    <div class="point"> <h2 class="menu-txt">Extra</h2> </div>
+    <div id="menu-btn"><div></div></div>
     <div class="point"> <h2 class="menu-txt" onclick="load_menu('prestige-temp')">Prestige</h2> </div>
+    <div class="point"> <h2 class="menu-txt" onclick="load_menu('spells-temp')">Spells</h2> </div>
     <div class="point"> <h2 class="menu-txt" onclick="load_menu('minion-temp')">Minions</h2> </div>
     <div class="point"> <h2 class="menu-txt" onclick="load_menu('upgrade-temp')">Upgrades</h2> </div>
     <div id="poppup-wrapper"></div>
@@ -28,8 +31,8 @@
         <div id="poppup-content" style="padding: 10px; width: auto;">
             <h2 style="color: white; text-align: center; padding: 0.5rem 0.5rem 1.2rem 0.5rem;">-- Upgrades --</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <img class="btn-t1" onmouseenter="set_tip('#0')" onmouseleave="toggle_tip()" src="./assets/power1.svg">
-                <img class="btn-t1" onmouseenter="set_tip('#1')" onmouseleave="toggle_tip()" src="./assets/power2.svg">
+                <div class="btn-t1" onclick="clicked_btn(this, 'upgr0')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/power1.svg);"><h3 watch>{upgr0_lvl}</h3><h3 watch>{upgr0_cost}</h3></div>
+                <div class="btn-t1" onclick="clicked_btn(this, 'upgr1')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/power2.svg);"><h3 watch>{upgr1_lvl}</h3><h3 watch>{upgr1_cost}</h3></div>
             </div>
         </div>
     </template>
@@ -37,8 +40,16 @@
         <div id="poppup-content" style="padding: 10px; width: auto;">
             <h2 style="color: white; text-align: center; padding: 0.5rem 0.5rem 1.2rem 0.5rem;">-- Minions --</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <img class="btn-t1" onmouseenter="set_tip('Summon a zombie to help!')" onmouseleave="toggle_tip()" src="./assets/minion1.svg">
-                <img class="btn-t1" onmouseenter="set_tip('Summon aquatic reinforcements!')" onmouseleave="toggle_tip()" src="./assets/minion2.svg">
+                <div class="btn-t1" onclick="clicked_btn(this, 'minion0')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/minion1.svg);"><h3 watch>{minion0_lvl}</h3><h3 watch>{minion0_cost}</h3></div>
+                <div class="btn-t1" onclick="clicked_btn(this, 'minion1')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/minion2.svg);"><h3 watch>{minion1_lvl}</h3><h3 watch>{minion1_cost}</h3></div>
+            </div>
+        </div>
+    </template>
+    <template id="spells-temp">
+        <div id="poppup-content" style="padding: 10px; width: auto;">
+            <h2 style="color: white; text-align: center; padding: 0.5rem 0.5rem 1.2rem 0.5rem;">-- Spells --</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="btn-t1" onclick="clicked_btn(this, 'spell0')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/spell1.svg);"><h3 watch>{spell0_lvl}</h3><h3 watch>{minion0_cost}</h3></div>
             </div>
         </div>
     </template>
@@ -46,9 +57,10 @@
         <div id="poppup-content" style="padding: 10px; width: auto;">
             <h2 style="color: white; text-align: center; padding: 0.5rem 0.5rem 1.2rem 0.5rem;">-- Prestige --</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <img class="btn-t1" onmouseenter="set_tip('Feel the power')" onmouseleave="toggle_tip()" src="./assets/prestige1.svg">
+                <img class="btn-t1" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" src="./assets/prestige1.svg">
             </div>
         </div>
     </template>
+    
 </body>
 </html>
