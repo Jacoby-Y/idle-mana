@@ -1,5 +1,5 @@
 const mana_txt = $("#mana-txt");
-const mana_orb = $("#mana-orb");
+// const mana_orb = $("#mana-orb");
 const holding_bar = $("#holding-bar");
 const holding_wrapper = $("#holding-wrapper");
 
@@ -8,12 +8,21 @@ const mouse = {
     when_down: 0
 }
 let hold_idle = false;
-let idle_speed = 500;
+data.hold_time = get_or("hold_time", 1000);
 let block_idle = false;
 
 mana_orb.onmousedown = ()=>{
     mouse.holding_orb = true;
-    data.mana++;
+
+    if (data.mana + data.upgr0_lvl <= data.max_mana)
+        data.mana += data.upgr0_lvl;
+    else data.mana = data.max_mana;
+
+    const rand = Math.floor(Math.random() * (101 - 1) + 1);
+    if (rand <= data.upgr1_lvl) {
+        data.mana += data.upgr0_lvl*2;
+    }
+
     mouse.when_down = Date.now();
     setTimeout(() => {
         // console.log("mana_orb mousedown, timeout");
@@ -37,15 +46,19 @@ document.onmouseup = ()=>{
 const run_idle_bar = ()=>{
     if (block_idle) return;
     // console.log("run_idle_bar!");
-    holding_bar.style.transitionDuration = "0.5s";
+    holding_bar.style.transitionDuration = `${data.hold_time/1000}s`;
     holding_bar.style.width = "100%";
     setTimeout(() => {
         // console.log("run_idle_bar, timed out");
         holding_bar.style.transitionDuration = "0s";
         holding_bar.style.width = "20%";
-        data.mana++;
+        // data.mana += data.upgr2_lvl;
+        if (data.mana + data.upgr2_lvl <= data.max_mana)
+            data.mana += data.upgr2_lvl;
+        else data.mana = data.max_mana;
+
         if (mouse.holding_orb) {
             setTimeout(() => { run_idle_bar() }, 50);
         }
-    }, 450);
+    }, data.hold_time-50);
 }

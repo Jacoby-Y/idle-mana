@@ -1,3 +1,10 @@
+# 0.3
+- Populated assets folder
+- More code destructuring 
+- Hover effects
+- Populated menu sections with buttons and text
+- Added foundation code for spells 
+
 # 0.2
 - Added watcher.js
 - Implemented watcher data object

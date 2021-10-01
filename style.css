@@ -11,20 +11,22 @@ body {
 #mana-orb {
     width: 50vh;
     height: 50vh;
-    background: radial-gradient(rgb(0, 215, 215) 0%, rgb(0, 235, 235) 50%, rgb(0, 255, 255) 100%); /* rgb(0, 219, 219); */
+    background: radial-gradient(rgb(0, 215, 215) 0%, rgb(0, 235, 235) 50%, rgb(0, 255, 255) 100%); 
     
-    animation-duration: 1s;
+    /* animation-duration: 1s;
     animation-iteration-count: infinite;
-    animation-name: orb-glow;
+    animation-name: orb-glow; */
     
     border-radius: 50%;
     -webkit-box-shadow: 0px 0px 15px 5px rgba(0, 219, 219, .75);
     -moz-box-shadow: 0px 0px 15px 5px rgba(0, 219, 219, .75);
     box-shadow: 0px 0px 15px 5px rgba(0, 219, 219, .75);
+    /* box-shadow: 0px 0px 15px 5px rgba(248, 66, 66, 0.75); */
     position: absolute;
     top: 50%; left: 50%;
     transform: translate(-50%, -50%);
     transition-duration: 0.3s;
+    cursor: pointer;
 }
 #mana-orb:hover {
     width: 51vh;
@@ -101,6 +103,7 @@ body {
     right: 0;
     transform: translate(50%, -50%);
     transition-duration: 0.3s;
+    cursor: pointer;
     /* box-shadow: 0px 0 10px aqua; */
 }
 #menu-btn div {
@@ -122,17 +125,18 @@ body {
     opacity: 0;
 }
 .menu-txt {
-    color: aqua; 
+    color: white; 
     width: min-content; 
     text-align: right;
     cursor: pointer;
     padding: 0.5rem;
     border-radius: 1rem;
-    transform: translate(-110%, -30%); 
+    transform: translate(-110%, -35%); 
     transition-duration: 0.3s;
 }
 .menu-txt:hover {
-    transform: translate(-120%, -30%); 
+    transform: translate(-120%, -35%); 
+    text-shadow: 0 0 5px rgba(0, 255, 255, 0.75);
 }
 
 #poppup-wrapper {
@@ -153,24 +157,35 @@ body {
     background-repeat: no-repeat;
     height: calc(10vw - 16px);
     position: relative;
+    cursor: pointer;
 }
-.btn-t1 h3:first-of-type {
+.btn-t1 h3 {
     position: absolute;
-    color: white;
-    background-color: black;
+    left: 100%;
+    z-index: 10;
+    opacity: 0;
     padding: 5px 10px;
+    border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-    top: 0;
-    left: 0;
+    transition-duration: 0.5s;
 }
-.btn-t1 h3:last-of-type {
-    position: absolute;
+.btn-t1-lvl {
+    color: white;
+    border: 1px solid aqua;
+    border-left: none;
+    background-color: black;
+    top: -1px;
+}
+.btn-t1-cost {
     color: black;
     background-color: rgb(30, 255, 0);
-    padding: 5px 10px;
-    border-top-left-radius: 10px;
-    bottom: 0;
-    right: 0;
+    bottom: -1px;
+} 
+.btn-t1:hover {
+    z-index: 20;
+}
+.btn-t1:hover h3 {
+    opacity: 1;
 }
 
 #tip {
@@ -186,4 +201,26 @@ body {
     color: white;
     text-align: center;
     padding: 10px;
+}
+
+.spell {
+    position: absolute;
+    width: 3rem;
+    height: 3rem;
+    background-color: rgb(216, 104, 104);
+    -webkit-box-shadow: 0px 0px 10px 2px rgb(216, 104, 104);
+    -moz-box-shadow: 0px 0px 10px 2px rgb(216, 104, 104);
+    box-shadow: 0px 0px 10px 2px rgb(216, 104, 104);
+    border-radius: 50%;
+    cursor: pointer;
+}
+.spell:hover {
+    width: 3.1rem;
+    height: 3.1rem;
+    transform: translate(-0.05rem, -0.05rem);
+}
+.spell:active {
+    width: 2.9rem;
+    height: 2.9rem;
+    transform: translate(0.05rem, 0.05rem);
 }

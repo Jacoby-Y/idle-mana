@@ -32,6 +32,7 @@ const set_points = (i=points.length-1)=>{
         points[i].style.left = `${o.x-x}px`;
         points[i].style.top = `${o.y-y}px`;
         points[i].style.opacity = "1";
+        points[i].children[0].style.color = "aqua";
 
         i--;
         if (i >= 0) set_points(i);
@@ -43,6 +44,7 @@ const clear_points = (i=0)=>{
         const p = points[i];
 
         p.style.opacity = "0";
+        p.children[0].style.color = "white";
 
         i++;
         if (i < points.length) clear_points(i);

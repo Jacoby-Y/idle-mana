@@ -2,7 +2,8 @@ const poppup_wrapper = $("#poppup-wrapper");
 const upgrade_temp = $("#upgrade-temp");
 const tip = $("#tip");
 const tip_txt = $("#tip-txt");
-// console.log(upgrade_temp.content.children);
+
+const menu_funcs = {};
 
 let tip_out = false;
 
@@ -31,10 +32,13 @@ const toggle_tip = (bool=false)=>{
     }
     tip_out = bool;
 }
-const clicked_btn = (elem, key)=>{
+const clicked_btn = (key)=>{
     const cost = data[`${key}_cost`];
     if (data.mana >= cost) {
         data.mana -= cost;
         data[`${key}_lvl`]++;
+        const func = menu_funcs[`${key}_click`];
+        if (func != undefined) func();
+        else console.log(`menu_funcs[${key}_click] == undefined`);
     }
 }
