@@ -4,6 +4,7 @@ const tip = $("#tip");
 const tip_txt = $("#tip-txt");
 
 const menu_funcs = {};
+const check_funcs = {};
 
 let tip_out = false;
 
@@ -31,14 +32,4 @@ const toggle_tip = (bool=false)=>{
         tip.style.transform = "translate(0, -100%)";
     }
     tip_out = bool;
-}
-const clicked_btn = (key)=>{
-    const cost = data[`${key}_cost`];
-    if (data.mana >= cost) {
-        data.mana -= cost;
-        data[`${key}_lvl`]++;
-        const func = menu_funcs[`${key}_click`];
-        if (func != undefined) func();
-        else console.log(`menu_funcs[${key}_click] == undefined`);
-    }
 }

@@ -125,8 +125,8 @@ body {
     opacity: 0;
 }
 .menu-txt {
-    color: white; 
-    width: min-content; 
+    color: aqua; 
+    width: max-content; 
     text-align: right;
     cursor: pointer;
     padding: 0.5rem;
@@ -151,6 +151,20 @@ body {
     border-top: 2px solid aqua;
     width: 100%; height: 100%;
     margin-top: 2.9rem;
+}
+#lapis-txt {
+    color: white; 
+    padding: 0.2rem 0.5rem; 
+    position: absolute; 
+    top: 0; 
+    right: 0rem;
+    transform: translate(calc(100% - 0px), -2px);
+    background-color: rgb(107, 107, 255);
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+    border-top: 2px solid aqua;
+    border-right: 2px solid aqua;
+    border-bottom: 2px solid aqua;
 }
 .btn-t1 {
     border: 1px solid aqua;
@@ -181,6 +195,11 @@ body {
     background-color: rgb(30, 255, 0);
     bottom: -1px;
 } 
+.btn-t1-cost2 {
+    background-color: rgb(107, 107, 255);
+    color: white;
+    bottom: -1px;
+}
 .btn-t1:hover {
     z-index: 20;
 }
@@ -213,6 +232,7 @@ body {
     box-shadow: 0px 0px 10px 2px rgb(216, 104, 104);
     border-radius: 50%;
     cursor: pointer;
+    display: none;
 }
 .spell:hover {
     width: 3.1rem;
@@ -224,3 +244,90 @@ body {
     height: 2.9rem;
     transform: translate(0.05rem, 0.05rem);
 }
+.spell div {
+    width: 100%; 
+    height: 100%; 
+    border-radius: 50%; 
+    clip-path: polygon(0 100%, 100% 100%, 100% 100%, 0% 100%); 
+    background-color: rgba(0, 200, 200, 0.3);
+    transition-duration: 1s;
+    transition-timing-function: linear;
+}
+.spell h3 {
+    color: white;
+    background-color: rgb(216, 104, 104);
+    padding: 0px 6px 2px 6px;
+    border-radius: 50%;
+    position: absolute;
+    top: -10%;
+    left: -10%;
+    -webkit-box-shadow: 0px 0px 10px 2px rgb(216, 104, 104);
+    -moz-box-shadow: 0px 0px 10px 2px rgb(216, 104, 104);
+    box-shadow: 0px 0px 10px 2px rgb(216, 104, 104);
+    display: none;
+}
+
+ #card-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #212121;
+    opacity: 0;
+    transition-duration: 1s;
+    pointer-events: none;
+    z-index: 20;
+    display: grid;
+    gap: 1rem;
+    justify-content: center;
+    align-content: center;
+}
+.card-desc {
+    color: white;
+    padding: 8px 10px;
+    font-size: 1rem;
+}
+
+
+.flip-card {
+    background-color: transparent;
+    width: 200px;
+    height: 300px;
+    perspective: 1000px;
+    border-radius: 10px;
+    transition-property: box-shadow;
+    transition-duration: 0.3s;
+}
+.flip-card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+}
+.flip-card:hover {
+    /* box-shadow: 5px 5px 5px 2px black; */
+}
+/* .flip-card:hover .flip-card-inner {
+    transform: rotateY(180deg);
+} */
+.flip-card-front, .flip-card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden; /* Safari */
+    backface-visibility: hidden;
+}
+.flip-card-front {
+    background-color: #303030;
+    border-radius: 10px;
+    color: black;
+}
+.flip-card-back {
+    border-radius: 10px;
+    background-color: #303030;
+    color: white;
+    transform: rotateY(180deg);
+} 

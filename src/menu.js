@@ -5,17 +5,26 @@ const points = $(".point");
 let menu_out = false;
 
 menu_btn.onclick = ()=>{
+    const pts = shown_points();
     if (menu_out) {
         circ_menu.style.transform = "translate(50%, -50%) rotate(135deg)";
-        clear_points();
+        clear_points(pts, pts.length-1);
     }
     else {
         circ_menu.style.transform = "translate(50%, -50%) rotate(-45deg)";
-        set_points();
+        set_points(pts);
     }
     menu_out = !menu_out;
 }
-const set_points = (i=points.length-1)=>{
+const shown_points = ()=>{
+    let res = [];
+    for (let i = 0; i < points.length; i++) {
+        const p = points[i];
+        if (!p.hasAttribute("hide")) res.push(p);
+    }
+    return res;
+}
+const set_points = (pts, i=0)=>{
     setTimeout(() => {
         if (!menu_out) return;
         const o = {
@@ -24,29 +33,34 @@ const set_points = (i=points.length-1)=>{
         }
         const d = window.innerHeight/4;
         const sq = 0.5;
-        const off = 2;
-        const a = ((off / points.length) * i+((off/(points.length))-(off/(points.length*2)))); 
+        const off = -2;
+        const len = pts.length;
+        // const a = ((off / points.length) * i+((off/(points.length))-(off/(points.length*2)))); 
+        const a = ((off / len) * i+((off/(len))-(off/(len*2)))); 
         const x = Math.cos(a-(off/2))*d;
         const y = Math.sin(a-(off/2))*d;
 
-        points[i].style.left = `${o.x-x}px`;
-        points[i].style.top = `${o.y-y}px`;
-        points[i].style.opacity = "1";
-        points[i].children[0].style.color = "aqua";
-
-        i--;
-        if (i >= 0) set_points(i);
-    }, 500/(points.length+1));
-}
-const clear_points = (i=0)=>{
-    setTimeout(() => {
-        if (menu_out) return;
-        const p = points[i];
-
-        p.style.opacity = "0";
-        p.children[0].style.color = "white";
+        pts[i].style.display = "block";
+        pts[i].style.left = `${o.x-x}px`;
+        pts[i].style.top = `${o.y-y}px`;
+        pts[i].style.opacity = "1";
+        pts[i].children[0].style.color = "aqua";
 
         i++;
-        if (i < points.length) clear_points(i);
+        if (i < len) set_points(pts, i);
+    }, 500/(pts.length));
+}
+const clear_points = (pts, i)=>{
+    // console.log(pts);
+    setTimeout(() => {
+        if (menu_out) return;
+        const p = pts[i];
+
+        p.style.opacity = "0";
+        p.style.display = "none";
+        // p.children[0].style.color = "white";
+
+        i--;
+        if (i >= 0) clear_points(pts, i);
     }, 500/(points.length+1));
 }

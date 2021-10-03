@@ -11,10 +11,13 @@
     <script defer src="./src/menus/upgrades.js"></script>
     <script defer src="./src/menus/minions.js"></script>
     <script defer src="./src/menus/spells.js"></script>
-    <script defer src="./src/menus/prestige.js"></script>
+    <script defer src="./src/menus/lapis_shop.js"></script>
+    <!-- <script defer src="./src/menus/prestige.js"></script> -->
 
     <script defer src="./src/minion.js"></script>
     <script defer src="./src/events.js"></script>
+    <script defer src="./src/cast_spell.js"></script>
+
     <link rel="stylesheet" href="./style.css">
     <title>Mana Idler!</title>
 </head>
@@ -27,15 +30,22 @@
     <div id="circ-menu"></div>
     <div id="menu-btn"><div></div></div>
 
-    <div class="point"> <h2 class="menu-txt" onclick="load_menu('prestige-temp')">Prestige</h2> </div>
-    <div class="point"> <h2 class="menu-txt" onclick="load_menu('spells-temp')">Spells</h2> </div>
-    <div class="point"> <h2 class="menu-txt" onclick="load_menu('minion-temp')">Minions</h2> </div>
     <div class="point"> <h2 class="menu-txt" onclick="load_menu('upgrade-temp')">Upgrades</h2> </div>
+    <div class="point"> <h2 class="menu-txt" onclick="load_menu('minion-temp')">Minions</h2> </div>
+    <div class="point"> <h2 class="menu-txt" onclick="load_menu('spells-temp')">Spells</h2> </div>
+    <!-- <div class="point"> <h2 class="menu-txt" onclick="load_menu('prestige-temp')">Prestige</h2> </div> -->
+    <div class="point"> <h2 class="menu-txt" onclick="load_menu('lapis-shop-temp')">Lapis Shop</h2> </div>
 
-    <div class="spell"></div> <div class="spell"></div> <div class="spell"></div> <div class="spell"></div> <div class="spell"></div> <div class="spell"></div> 
+    <div class="spell" onclick="cast_spell('cast0', this)" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/spell0_btn.svg);"> <div></div> <h3>x</h3> </div> 
+    <div class="spell" onclick="cast_spell('cast1', this)" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/spell1_btn.svg);"> <div></div> <h3>x</h3> </div> 
+    <div class="spell" onclick="cast_spell('cast2', this)" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/spell2_btn.svg); background-size: 110%; background-position: 60% 50%;"> <div></div> <h3>x</h3> </div> 
+    <div class="spell" onclick="cast_spell('cast3', this)" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/spell3_btn.svg);"> <div></div> <h3>x</h3> </div> 
+    <div class="spell" onclick="cast_spell('cast4', this)" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/spell4_btn.svg);"> <div></div> <h3>x</h3> </div> 
 
     <div id="poppup-wrapper"></div>
     <div id="tip"><h3 id="tip-txt">Default</h3></div>
+
+    <div id="card-wrapper"></div>
     
     <template id="upgrade-temp">
         <div id="poppup-content" style="padding: 10px; width: auto;">
@@ -67,17 +77,32 @@
             <h2 style="color: white; text-align: center; padding: 0.5rem 0.5rem 1.2rem 0.5rem;">-- Spells --</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                 <div class="btn-t1" onclick="clicked_btn('spell0')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/spell0.svg);"><h3 class="btn-t1-cost" watch>{spell0_cost}</h3></div>
+                <div class="btn-t1" onclick="clicked_btn('spell1')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/spell1.svg);"><h3 class="btn-t1-cost" watch>{spell1_cost}</h3></div>
+                <div class="btn-t1" onclick="clicked_btn('spell2')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/spell2.svg);"><h3 class="btn-t1-cost" watch>{spell2_cost}</h3></div>
+                <div class="btn-t1" onclick="clicked_btn('spell3')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/spell3.svg);"><h3 class="btn-t1-cost" watch>{spell3_cost}</h3></div>
+                <div class="btn-t1" onclick="clicked_btn('spell4')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/spell4.svg);"><h3 class="btn-t1-cost" watch>{spell4_cost}</h3></div>
             </div>
         </div>
     </template>
-    <template id="prestige-temp">
+    <!-- <template id="prestige-temp">
         <div id="poppup-content" style="padding: 10px; width: auto;">
             <h2 style="color: white; text-align: center; padding: 0.5rem 0.5rem 1.2rem 0.5rem;">-- Prestige --</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
-                <div class="btn-t1" onclick="clicked_btn('prest')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/prestige0.svg);"><h3 class="btn-t1-lvl" watch>{prest}</h3><h3 class="btn-t1-cost" watch>{prest_cost}</h3></div>
+                <div class="btn-t1" onclick="clicked_btn('prest')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/prestige0.svg);"><h3 class="btn-t1-lvl" watch>{prest_lvl}</h3><h3 class="btn-t1-cost" watch>{prest_cost}</h3></div>
             </div>
         </div>
+    </template> -->
+    <template id="lapis-shop-temp">
+        <div id="poppup-content" style="padding: 10px; width: auto; position: relative;">
+            <h2 style="color: white; text-align: center; padding: 0.5rem 0.5rem 1.2rem 0.5rem;">-- Lapis Shop --</h2>
+            <h2 id="lapis-txt" watch>{lapis}</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="btn-t1" onclick="clicked_btn('prest')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/prestige0.svg);"><h3 class="btn-t1-lvl" watch>{prest_lvl}</h3><h3 class="btn-t1-cost" watch>{prest_cost}</h3></div>
+                <div class="btn-t1" onclick="buy_card('card0')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/card0.svg);"><h3 class="btn-t1-cost2" watch>{card0_cost}</h3></div>
+                <div class="btn-t1" onclick="buy_card('card1')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/card1.svg);"><h3 class="btn-t1-cost2" watch>{card1_cost}</h3></div>
+                <div class="btn-t1" onclick="buy_card('card2')" onmouseenter="set_tip('')" onmouseleave="toggle_tip()" style="background-image: url(./assets/card2.svg);"><h3 class="btn-t1-cost2" watch>{card2_cost}</h3></div>
+            </div><!-- set_tip(str: "card", index: 0) // tool_tips[str][index] -->
+        </div>
     </template>
-    
 </body>
 </html>

@@ -7,3 +7,7 @@ document.body.onclick = (e)=>{
             menu_btn.onclick();
     }
 }
+window.onresize = ()=>{
+    set_points(shown_points());
+    set_spells();
+}

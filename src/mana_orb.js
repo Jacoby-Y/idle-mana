@@ -10,12 +10,14 @@ const mouse = {
 let hold_idle = false;
 data.hold_time = get_or("hold_time", 1000);
 let block_idle = false;
+let spell0_mult = 1;
+let spell1_mult = 1;
 
 mana_orb.onmousedown = ()=>{
     mouse.holding_orb = true;
 
     if (data.mana + data.upgr0_lvl <= data.max_mana)
-        data.mana += data.upgr0_lvl;
+        data.mana += data.upgr0_lvl * spell0_mult;
     else data.mana = data.max_mana;
 
     const rand = Math.floor(Math.random() * (101 - 1) + 1);
@@ -54,7 +56,7 @@ const run_idle_bar = ()=>{
         holding_bar.style.width = "20%";
         // data.mana += data.upgr2_lvl;
         if (data.mana + data.upgr2_lvl <= data.max_mana)
-            data.mana += data.upgr2_lvl;
+            data.mana += data.upgr2_lvl * spell1_mult;
         else data.mana = data.max_mana;
 
         if (mouse.holding_orb) {

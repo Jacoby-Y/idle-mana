@@ -1,3 +1,11 @@
+# 0.4
+- Prototyped foundation for minions
+- Filled in spell art
+- Prototped foundation for spells
+- Formatting mana number 
+- Prototyped foundation for lapis shop
+- Prototyped buying card scene
+
 # 0.3.1
 - Fixed up prestige button
 - Added 'TODO.md'
