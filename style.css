@@ -289,6 +289,16 @@ body {
     transition-timing-function: linear;
     text-align: center;
 }
+#run-cine {
+    background-image: url("./assets/cine.svg");
+    width: 3rem;
+    height: 3rem;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
 #version {
     color: white;
     position: absolute;

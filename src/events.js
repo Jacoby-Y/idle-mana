@@ -13,17 +13,22 @@ window.onresize = ()=>{
     set_spells();
 }
 const do_cine = ()=>{
+    console.log("running cinematic");
+    cine.style.pointerEvents = "auto";
+    cine_txt.style.opacity = "0";
+    cine_txt.innerText = "";
     setTimeout(() => {
+        cine_txt.innerText = "Jacoby Productions presents";
         cine_txt.style.opacity = "1";
         setTimeout(() => {
             cine_txt.style.opacity = "0";
             setTimeout(() => {
-                cine_txt.innerText = "A game made with love"
+                cine_txt.innerText = "A game made with love";
                 cine_txt.style.opacity = "1";
                 setTimeout(() => {
                     cine_txt.style.opacity = "0";
                     setTimeout(() => {
-                        cine_txt.innerText = "[ insert epic name here ]"
+                        cine_txt.innerText = "[ insert epic name here ]";
                         cine_txt.style.opacity = "1";
                         setTimeout(() => {
                             cine_txt.style.opacity = "0";
@@ -60,6 +65,8 @@ const cine_txt = $("#cine-txt");
 
 let no_cine = false;
 
+console.log($("#run-cine"));
+$("#run-cine").onclick = ()=>{ cine.style.opacity = "1"; do_cine(); }
 
 if (!local.can_load() || local.get_storage().version == undefined) {
     localStorage.clear();
@@ -71,6 +78,7 @@ if (!local.can_load() || local.get_storage().version == undefined) {
         no_cine = true;
         cine.style.opacity = "0"; 
         cine.style.pointerEvents = "none";
+        cine.onclick = null;
     }
     setTimeout(() => {
         if (no_cine) return;
@@ -84,6 +92,7 @@ if (!local.can_load() || local.get_storage().version == undefined) {
                 cine.style.opacity = "0";
                 setTimeout(() => {
                     cine.style.pointerEvents = "none";
+                    cine.onclick = null;
                 }, 1000);
             }, 1000);
         }, 2000);

@@ -1,3 +1,6 @@
+# 0.6.2
+- Ability to watch cinematic whenever
+
 # 0.6.1
 - Quality of life changes
 
