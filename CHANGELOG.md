@@ -1,3 +1,6 @@
+# 0.6.3
+- Fixed version issue from last update
+
 # 0.6.2
 - Ability to watch cinematic whenever
 

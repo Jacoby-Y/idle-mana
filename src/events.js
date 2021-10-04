@@ -1,4 +1,4 @@
-const VERSION = "v0.6";
+const VERSION = "v0.6.3";
 
 document.body.onclick = (e)=>{
     if (e.target == document.body) {
@@ -13,7 +13,7 @@ window.onresize = ()=>{
     set_spells();
 }
 const do_cine = ()=>{
-    console.log("running cinematic");
+    // console.log("running cinematic");
     cine.style.pointerEvents = "auto";
     cine_txt.style.opacity = "0";
     cine_txt.innerText = "";
@@ -53,6 +53,11 @@ $("#version").innerText = VERSION;
 data.version = get_or("version", VERSION);
 data.offline = get_or("offline", Math.floor(Date.now()/1000));
 
+if (data.version != VERSION) {
+    // do something, it's a new version!
+    data.version = VERSION;
+}
+
 // Save loop
 const save_loop = setInterval(() => {
     // console.log("storing data");
@@ -65,7 +70,7 @@ const cine_txt = $("#cine-txt");
 
 let no_cine = false;
 
-console.log($("#run-cine"));
+// console.log($("#run-cine"));
 $("#run-cine").onclick = ()=>{ cine.style.opacity = "1"; do_cine(); }
 
 if (!local.can_load() || local.get_storage().version == undefined) {
