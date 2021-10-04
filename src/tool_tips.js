@@ -26,6 +26,10 @@ const tips = {
     spell2_btn: `Powers up your minions`,
     spell3_btn: `Gives you a shop discount for a few purchases`,
     spell4_btn: `Cuts your speel cooldowns in half`,
+    prest: `Prestiging lets you start over in exchange for "Lapis"`,
+    card0: `Buy a pack of 3 cards`,
+    card1: `Buy a pack of 6 cards`,
+    card2: `Buy a pack of 10 cards`,
 }
 
 /*

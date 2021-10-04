@@ -287,7 +287,16 @@ body {
     opacity: 0;
     transition-duration: 1s;
     transition-timing-function: linear;
+    text-align: center;
 }
+#version {
+    color: white;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    padding: 10px 15px;
+}
+
 #card-wrapper {
     position: absolute;
     top: 0;
@@ -337,9 +346,6 @@ body {
     text-align: center;
     transition: transform 0.8s;
     transform-style: preserve-3d;
-}
-.flip-card:hover {
-    /* box-shadow: 5px 5px 5px 2px black; */
 }
 /* .flip-card:hover .flip-card-inner {
     transform: rotateY(180deg);

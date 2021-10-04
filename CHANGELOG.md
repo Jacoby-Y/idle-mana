@@ -1,3 +1,13 @@
+# 0.6
+- Offline earnings setup
+- Fixed up opening cinematic
+- Added version variable to check against when loading page
+- Show version at bottom right
+- Finished up tooltips
+- Setup prestige cost
+- Added some quality of life
+- Added offline earnings functionality
+
 # 0.5
 - Post-prestige cards work
 - Populated tool tips

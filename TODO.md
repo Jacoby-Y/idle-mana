@@ -3,6 +3,7 @@
 ## Back Burner
 
 # Done
+- credit game-icons.net
 - Game opening sequence 
 - critial 100%+ check
 - System of unlocking the next minion by buying some of the previous

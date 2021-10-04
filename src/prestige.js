@@ -2,12 +2,13 @@ const loading = $("#loading");
 let prest_cin = false;
 
 data.prest_lvl = get_or("prest_lvl", 0); defaults.prest_lvl = 0; 
-data.prest_cost = get_or("prest_cost", 1000); defaults.prest_cost = 1000; 
+data.prest_cost = get_or("prest_cost", 10000);
 data.last_max = get_or("last_max", 0); defaults.last_max = 0; 
 
 const prestige_click = ()=>{
     console.log("prestiging!");
-    // if (data.max_mana < 10000 || data.mana < data.max_mana) return;
+    if (data.max_mana < 10000 || data.mana < data.max_mana) return;
+    data.prest_cost += 5000;
 
     card_wrapper.style.opacity = "1";
     card_wrapper.style.pointerEvents = "auto";

@@ -1,5 +1,24 @@
 let spell2_mult = 1;
 
+const offline_earnings = ()=>{
+    const now = Math.floor(Date.now()/1000);
+    const diff = now - data.offline;
+    
+    let total = 0;
+    if (diff > 5) {
+        // console.log("earned offline!");
+        for (let i = 0; i < minion_len; i++) {
+            const add = (data[`minion${i}_lvl`] * data[`minion${i}_pow`]) * diff;
+            const card_bonus = 1+(data.cards[`minion${i}`] * 0.05);
+            total += add * card_bonus;
+            if (isNaN(card_bonus) || isNaN(add)) console.log(`minion${i} is having problems!`);
+        }
+        if (data.mana + total > data.max_mana) data.mana = data.max_mana;
+        else if (data.mana + total < data.max_mana) data.mana += total;
+    }
+    return total;
+}
+
 const idle_loop = setInterval(() => {
     
     // data.minion0_lvl * data.minion0_pow
@@ -14,11 +33,9 @@ const idle_loop = setInterval(() => {
         if (isNaN(card_bonus) || isNaN(add)) console.log(`minion${i} is having problems!`);
     }
 
-    if (data.mana + total > data.max_mana) {
-        data.mana = data.max_mana;
-    } else if (data.mana + total < data.max_mana) {
-        data.mana += total;
-    }
+    if (data.mana + total > data.max_mana) data.mana = data.max_mana;
+    else if (data.mana + total < data.max_mana) data.mana += total;
+    
     // console.log(total);
 }, 250);
 
