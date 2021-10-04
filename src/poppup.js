@@ -1,12 +1,8 @@
 const poppup_wrapper = $("#poppup-wrapper");
 const upgrade_temp = $("#upgrade-temp");
-const tip = $("#tip");
-const tip_txt = $("#tip-txt");
 
 const menu_funcs = {};
 const check_funcs = {};
-
-let tip_out = false;
 
 const load_menu = (id)=>{
     while (poppup_wrapper.firstChild) {
@@ -20,16 +16,4 @@ const load_menu = (id)=>{
     }
 
     local.update_gui(data, data);
-}
-const set_tip = (txt)=>{
-    if (!tip_out) tip.style.transform = "translate(0, 0)";
-    tip_txt.innerText = txt;
-}
-const toggle_tip = (bool=false)=>{
-    if (bool) {
-        tip.style.transform = "translate(0, 0)";
-    } else {
-        tip.style.transform = "translate(0, -100%)";
-    }
-    tip_out = bool;
 }

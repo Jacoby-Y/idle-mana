@@ -13,7 +13,7 @@ const casts = {
         spell0_mult = 3;
     } }, post(){
         spell0_mult = 1;
-    }, cooldown: 0.02, duration: 1, last: 0, running: false },
+    }, cooldown: 1, duration: 30, last: 0, running: false },
 
     cast1: { cast(elem){ if (can_cast(this, elem)) {
         cast_anim(elem, this);

@@ -28,6 +28,7 @@ const format_num = (num, round=true)=>{
     return `${Math.round(num*10)/10}Q`;
 }
 
+let defaults = {};
 
 data.settings = {
     mana: {display(v) {
@@ -47,8 +48,8 @@ data.settings = {
     spell4_cost: {display(v){ if (data.spell4) {return "~"} return v }},
 }
 
-data.max_mana = get_or("max_mana", 1000);
-data.mana = get_or("mana", 0);
+data.max_mana = get_or("max_mana", 1000); defaults.max_mana = 1000;
+data.mana = get_or("mana", 0); defaults.mana = 0;
 
 const clicked_btn = (key)=>{
     const cost = data[`${key}_cost`];

@@ -7,52 +7,58 @@
     spell4: cut spell cooldowns 
 */
 
-data.spell0 = get_or("spell0", false);
-data.spell0_cost = get_or("spell0_cost", 5);
+data.spell0 = get_or("spell0", false); defaults.spell0 = false;
+data.spell0_cost = get_or("spell0_cost", 1500); defaults.spell0_cost = 1500;
 menu_funcs.spell0_click = ()=>data.spell0_cost = data.spell0_cost;
 check_funcs.spell0 = (v)=>{ 
     if (data.spell0) return false
     spells[0].style.display = "block"; 
+    $(".spell-btn")[1].style.display = "block";
+
     data.spell0=true; 
     return true; 
 };
 
-data.spell1 = get_or("spell1", false);
-data.spell1_cost = get_or("spell1_cost", 5);
+data.spell1 = get_or("spell1", false); defaults.spell1 = false;
+data.spell1_cost = get_or("spell1_cost", 3000); defaults.spell1_cost = 3000;
 menu_funcs.spell1_click = ()=>data.spell1_cost = data.spell1_cost;
 check_funcs.spell1 = (v)=>{ 
     if (data.spell1) return false
     spells[1].style.display = "block"; 
+    $(".spell-btn")[2].style.display = "block";
     data.spell1=true; 
     return true; 
 };
 
-data.spell2 = get_or("spell2", false);
-data.spell2_cost = get_or("spell2_cost", 5);
+data.spell2 = get_or("spell2", false); defaults.spell2 = false;
+data.spell2_cost = get_or("spell2_cost", 5000); defaults.spell2_cost = 5000;
 menu_funcs.spell2_click = ()=>data.spell2_cost = data.spell2_cost;
 check_funcs.spell2 = (v)=>{ 
     if (data.spell2) return false
     spells[2].style.display = "block"; 
+    // $(".spell-btn")[3].style = "block";
     data.spell2=true; 
     return true; 
 };
 
-data.spell3 = get_or("spell3", false);
-data.spell3_cost = get_or("spell3_cost", 5);
+data.spell3 = get_or("spell3", false); defaults.spell3 = false;
+data.spell3_cost = get_or("spell3_cost", 7500); defaults.spell3_cost = 7500;
 menu_funcs.spell3_click = ()=>data.spell3_cost = data.spell3_cost;
 check_funcs.spell3 = (v)=>{ 
     if (data.spell3) return false
     spells[3].style.display = "block"; 
+    $(".spell-btn")[4].style = "block";
     data.spell3=true; 
     return true; 
 };
 
-data.spell4 = get_or("spell4", false);
-data.spell4_cost = get_or("spell4_cost", 5);
+data.spell4 = get_or("spell4", false); defaults.spell4 = false;
+data.spell4_cost = get_or("spell4_cost", 12000); defaults.spell4_cost = 12000;
 menu_funcs.spell4_click = ()=>data.spell4_cost = data.spell4_cost;
 check_funcs.spell4 = (v)=>{ 
     if (data.spell4) return false
     spells[4].style.display = "block"; 
+    $(".spell-btn")[4].style = "block";
     data.spell4=true; 
     return true; 
 };

@@ -14,7 +14,8 @@ class Card {
             <div class="flip-card-inner">
                 <div class="flip-card-front"></div>
                 <div class="flip-card-back">
-                    <div style="width:auto; height:60%; margin: 10px 10px 5px 10px; background-image: url(${this.card.url});"></div>
+                    <h3 class="card-title">${this.card.title}</h3>
+                    <div class="card-img" style="background-image: url(${this.card.url});"></div>
                     <h3 class="card-desc">${this.card.desc}</h3>
                 </div>
             </div>
@@ -24,30 +25,35 @@ class Card {
 
 const card_wrapper = $("#card-wrapper");
 
-const con_card = (id, desc, url)=>{ return { id: id, desc: desc, url: url } }
+const con_card = (weight, id, title, desc, url)=>{ return { weight: weight, id: id, title: title, desc: desc, url: url } }
 const cards = [
-    con_card("upgr0", "Gives a bonus to your clicking abilities!", "./assets/cards/upgr0.svg")
+    con_card(20, "upgr0", "Midas Touch", "Gives a bonus to your clicking abilities", "./assets/cards/upgr0.svg"),
+    con_card(5, "upgr1", "Lightning Conduit", "Critical clicks are more powerful", "./assets/cards/upgr1.svg"),
+    con_card(7, "upgr2", "Double Time", "Gives a bonus to your manual idle abilities", "./assets/cards/upgr2.svg"),
+    con_card(5, "upgr3", "Rhythmic Strike", "Gives a chance to get a critical when you manually idle", "./assets/cards/upgr3.svg"),
+    con_card(15, "minion0", "Undead Lord", "Zombie minions are more effective", "./assets/cards/minion0.svg"),
+    con_card(9, "minion1", "Hydration", "Aquatic minions are more effective", "./assets/cards/minion1.svg"),
+    con_card(7, "minion2", "Filling Meal", "Beast minion are more effective", "./assets/cards/minion2.svg"),
+    con_card(5, "minion3", "Ectoplasm", "Ghostly minions are more effective", "./assets/cards/minion3.svg"),
+    con_card(3, "minion4", "Tasty Stones", "Rock golem minions are more effective", "./assets/cards/minion4.svg"),
+    con_card(1, "minion5", "Dragonium Mana", "Dragon minions are more effective", "./assets/cards/minion5.svg"),
+    con_card(1, "lapis0", "Magic Mastery", "Get extra lapis after prestige", "./assets/cards/lapis0.svg"),
 ];
 
-data.cards = get_or("cards", []);
-data.lapis = get_or("lapis", 0);
-data.card0_cost = get_or("card0_cost", 5);
-data.card1_cost = get_or("card1_cost", 5);
-data.card2_cost = get_or("card2_cost", 5);
-
-data.prest_lvl = get_or("prest_lvl", 0);
-data.prest_cost = get_or("prest_cost", 1000);
-check_funcs.prest = (v)=>{
-    if (data.max_mana < 10000 || data.mana < data.max_mana) return false;
-    return true;
-}
+const cards_default = { "upgr0": 0, "upgr1": 0, "upgr2": 0, "upgr3": 0, "minion0": 0, "minion1": 0, "minion2": 0, "minion3": 0, "minion4": 0, "minion5": 0, "lapis0": 0 };
+data.cards = get_or("cards", cards_default); // defaults.cards = cards_default;
+data.lapis = get_or("lapis", 0); // defaults.lapis = 0;
+data.card0_cost = get_or("card0_cost", 10); defaults.card0_cost = 10;
+data.card1_cost = get_or("card1_cost", 18); defaults.card1_cost = 18;
+data.card2_cost = get_or("card2_cost", 25); defaults.card2_cost = 25;
 
 let cards_up = 0;
 
 const buy_card = (type)=>{
-    while (card_wrapper.firstChild) { card_wrapper.removeChild(card_wrapper.firstChild); }
+    // while (card_wrapper.firstChild) { card_wrapper.removeChild(card_wrapper.firstChild); }
 
     if (data.lapis < data[`${type}_cost`]) return;
+    data.lapis -= data[`${type}_cost`];
 
     card_wrapper.style.opacity = "1";
     card_wrapper.style.pointerEvents = "auto";
@@ -83,17 +89,39 @@ const buy_card = (type)=>{
     }, 1000);
 }
 const store_card = (id)=>{
-    for (let i = 0; i < data.cards.length; i++) {
-        const c = data.cards[i];
-        if (c.id == id) {
-            c.num++;
-            return;
-        }
-    }
-    data.cards.push( { id: id, num: 1 } );
+
+    if (data.cards[id] == undefined) data.cards[id] = 1;
+    else data.cards[id]++;
+
+    // for (let i = 0; i < data.cards.length; i++) {
+    //     const c = data.cards[i];
+    //     if (c.id == id) {
+    //         c.num++;
+    //         return;
+    //     }
+    // }
+    // data.cards.push( { id: id, num: 1 } );
 }
 const rand_card = ()=>{
-    return cards[Math.floor(Math.random()*cards.length)];
+    let max = 1;
+
+    for (let i = 0; i < cards.length; i++) {
+        const c = cards[i];
+        max += c.weight;
+    }
+
+    let num = Math.floor(Math.random()*max);
+
+    for (let i = 0; i < cards.length; i++) {
+        const c = cards[i];
+        num -= c.weight;
+
+        if (num <= 0) {
+            return c;
+        }
+    }
+
+    // return cards[Math.floor(Math.random()*cards.length)];
 }
 const flip_card = (card)=>{
     const st = card.getElementsByClassName("flip-card-inner")[0].style;
@@ -104,6 +132,7 @@ const flip_card = (card)=>{
 }
 
 card_wrapper.onclick = function(){
+    if (prest_cin) return;
     if (cards_up == 0) {
         cards_up--; 
         return;
@@ -111,4 +140,5 @@ card_wrapper.onclick = function(){
     if (cards_up >= 0) return;
     this.style.opacity = "0";
     this.style.pointerEvents = "none";
+    while (card_wrapper.firstChild) { card_wrapper.removeChild(card_wrapper.firstChild); }
 }

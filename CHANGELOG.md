@@ -1,3 +1,10 @@
+# 0.5
+- Post-prestige cards work
+- Populated tool tips
+- Set (and tried to balance) cost amounts
+- Setup prestige cinematic and back-end
+- Basically ready for v1.0, but needs more testing
+
 # 0.4
 - Prototyped foundation for minions
 - Filled in spell art

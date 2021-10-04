@@ -8,7 +8,7 @@ const mouse = {
     when_down: 0
 }
 let hold_idle = false;
-data.hold_time = get_or("hold_time", 1000);
+data.hold_time = get_or("hold_time", 1000); defaults.hold_time = 1000; 
 let block_idle = false;
 let spell0_mult = 1;
 let spell1_mult = 1;
@@ -16,14 +16,23 @@ let spell1_mult = 1;
 mana_orb.onmousedown = ()=>{
     mouse.holding_orb = true;
 
-    if (data.mana + data.upgr0_lvl <= data.max_mana)
-        data.mana += data.upgr0_lvl * spell0_mult;
+    if (data.mana + data.upgr0_lvl <= data.max_mana){
+        const card_bonus = 1+(data.cards.upgr0 * 0.05);
+        data.mana += data.upgr0_lvl * spell0_mult * card_bonus;
+    }
     else data.mana = data.max_mana;
 
-    const rand = Math.floor(Math.random() * (101 - 1) + 1);
-    if (rand <= data.upgr1_lvl) {
-        data.mana += data.upgr0_lvl*2;
+    let chance = data.upgr1_lvl
+    while (chance > 0) {
+        const rand = Math.floor(Math.random() * (101 - 1) + 1);
+        if (rand <= chance) {
+            data.mana += (data.upgr0_lvl * 2) * (1+(data.cards.upgr1 * 0.25));
+            chance -= 100;
+            continue;
+        }
+        break;
     }
+    
 
     mouse.when_down = Date.now();
     setTimeout(() => {
@@ -56,8 +65,13 @@ const run_idle_bar = ()=>{
         holding_bar.style.width = "20%";
         // data.mana += data.upgr2_lvl;
         if (data.mana + data.upgr2_lvl <= data.max_mana)
-            data.mana += data.upgr2_lvl * spell1_mult;
+            data.mana += data.upgr2_lvl * spell1_mult * (1+(data.cards.upgr2 * 0.05));
         else data.mana = data.max_mana;
+
+        const rand = Math.floor(Math.random() * (101 - 1) + 1);
+        if (rand <= data.cards.upgr3) {
+            data.mana += data.upgr2_lvl*2;
+        }
 
         if (mouse.holding_orb) {
             setTimeout(() => { run_idle_bar() }, 50);
