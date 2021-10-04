@@ -62,6 +62,7 @@ let no_cine = false;
 
 
 if (!local.can_load() || local.get_storage().version == undefined) {
+    localStorage.clear();
     do_cine();
 } else {
     let total = offline_earnings();

@@ -1,3 +1,6 @@
+# 0.6.1
+- Quality of life changes
+
 # 0.6
 - Offline earnings setup
 - Fixed up opening cinematic

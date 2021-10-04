@@ -46,6 +46,7 @@ data.settings = {
     spell2_cost: {display(v){ if (data.spell2) {return "~"} return v }},
     spell3_cost: {display(v){ if (data.spell3) {return "~"} return v }},
     spell4_cost: {display(v){ if (data.spell4) {return "~"} return v }},
+    prest_cost: { display(v){ console.log("set prest"); return `${format_num(v)}` } },
 }
 
 data.max_mana = get_or("max_mana", 1000); defaults.max_mana = 1000;
