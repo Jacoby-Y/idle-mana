@@ -55,6 +55,9 @@ const buy_card = (type)=>{
     if (data.lapis < data[`${type}_cost`]) return;
     data.lapis -= data[`${type}_cost`];
 
+    $("#card-inv-point").removeAttribute("hide");
+    set_points(shown_points());
+
     card_wrapper.style.opacity = "1";
     card_wrapper.style.pointerEvents = "auto";
 
@@ -131,6 +134,27 @@ const flip_card = (card)=>{
     }
 }
 
+const get_coord = (elem)=>{ // crossbrowser version
+    let box = elem.getBoundingClientRect();
+
+    let body = document.body;
+    let docEl = document.documentElement;
+
+    let scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
+    let scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
+
+    let clientTop = docEl.clientTop || body.clientTop || 0;
+    let clientLeft = docEl.clientLeft || body.clientLeft || 0;
+
+    // let top  = box.top +  scrollTop - clientTop;
+    // let left = box.left + scrollLeft - clientLeft;
+
+    let top  = box.top - clientTop;
+    let left = box.left - clientLeft;  
+
+    return { top: Math.round(top), left: Math.round(left) };
+}
+
 card_wrapper.onclick = function(){
     if (prest_cin) return;
     if (cards_up == 0) {
@@ -138,7 +162,39 @@ card_wrapper.onclick = function(){
         return;
     }
     if (cards_up >= 0) return;
-    this.style.opacity = "0";
-    this.style.pointerEvents = "none";
-    while (card_wrapper.firstChild) { card_wrapper.removeChild(card_wrapper.firstChild); }
+    
+    
+
+    const fcards = $(".flip-card");
+    const card_objs = [];
+    
+    for (let i = 0; i < fcards.length; i++) {
+        const st = fcards[i].style;
+        card_objs.push( {elem: fcards[i], x: 0, y: 0, vect: { x: 10+( Math.floor(Math.random()*10)-2 ), y: -10+( Math.floor(Math.random()*20)-2 ) }} )
+        st.transform = `translate(${0}px, ${0}px)`;
+    }
+
+    const grav = 2;
+    const drag = 0.98;
+    const simulation_loop = setInterval(() => {
+        for (let i = 0; i < card_objs.length; i++) {
+            const obj = card_objs[i];
+            obj.x += obj.vect.x;
+            obj.y += obj.vect.y;
+            obj.vect.y += grav;
+
+            obj.vect.x *= drag;
+            obj.vect.y *= drag;
+
+            obj.elem.style.transform = `translate(${obj.x}px, ${obj.y}px)`;
+        }
+    }, 1000/30);
+
+    
+    setTimeout(() => {
+        clearInterval(simulation_loop);
+        this.style.opacity = "0";
+        this.style.pointerEvents = "none";
+        while (card_wrapper.firstChild) { card_wrapper.removeChild(card_wrapper.firstChild); }
+    }, 2500);
 }

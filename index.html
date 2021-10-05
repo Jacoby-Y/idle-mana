@@ -14,6 +14,7 @@
     <script defer src="./src/menus/minions.js"></script>
     <script defer src="./src/menus/spells.js"></script>
     <script defer src="./src/menus/lapis_shop.js"></script>
+    <script defer src="./src/menus/card_inventory.js"></script>
     <!-- <script defer src="./src/menus/prestige.js"></script> -->
     
     <script defer src="./src/minion.js"></script>
@@ -38,6 +39,7 @@
     <div class="point" id="minion-point" hide> <h2 class="menu-txt" onclick="load_menu('minion-temp')">Minions</h2> </div>
     <div class="point" id="spell-point" hide> <h2 class="menu-txt" onclick="load_menu('spells-temp')">Spells</h2> </div>
     <div class="point" id="lapis-point" hide> <h2 class="menu-txt" onclick="load_menu('lapis-shop-temp')">Lapis Shop</h2> </div>
+    <div class="point" id="card-inv-point" hide> <h2 class="menu-txt" onclick="open_inv()">Card Inventory</h2> </div>
     <!-- <div class="point"> <h2 class="menu-txt" onclick="load_menu('prestige-temp')">Prestige</h2> </div> -->
 
     <div class="spell" onclick="cast_spell('cast0', this)" onmouseenter="set_tip('spell0')" onmouseleave="toggle_tip()" style="background-image: url(./assets/spell0_btn.svg);"> <div></div> <h3>x</h3> </div> 
@@ -63,6 +65,10 @@
     <div id="run-cine"></div>
 
     <h3 id="version" onclick="load_site('https://github.com/Jacoby-Y/idle-mana')">version</h3>
+
+    <div id="card-inventory">
+        <div id="card-holder"></div>
+    </div>
 
     <div id="loading"></div>
     <!-- <img id="loading" src="./assets/loading.svg" alt="Loading"> -->

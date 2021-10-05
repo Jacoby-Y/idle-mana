@@ -1,4 +1,4 @@
-const VERSION = "v0.7.1";
+const VERSION = "v0.7.2";
 
 document.body.onclick = (e)=>{
     if (e.target == document.body) {
@@ -127,6 +127,20 @@ if (data.minion5_lvl >= 1) {
     $("#spell-point").removeAttribute("hide");
     $("#lapis-point").removeAttribute("hide");
 }
+const check_cards = ()=>{
+    for (const key in data.cards) {
+        if (Object.hasOwnProperty.call(data.cards, key)) {
+            const val = data.cards[key];
+            if (val > 0) return true;
+        }
+    }
+    return false;
+}
+if (check_cards()) {
+    $("#card-inv-point").removeAttribute("hide");
+}
+
+
 if (data.spell0) $(".spell")[0].style.display = "block";
 if (data.spell1) $(".spell")[1].style.display = "block";
 if (data.spell2) $(".spell")[2].style.display = "block";
@@ -137,11 +151,15 @@ let debug = false;
 document.addEventListener("keyup", (ev)=>{
     secret += ev.key;
     if (ev.key == "`" || secret.length > 10) secret = "";
-    if (secret == "debug") debug = true;
-    if (secret = "normal") debug = false;
+    if (secret == "debug") { debug = true; secret = ""; console.log("Entering debug mode!"); }
+    if (secret == "normal") { debug = false; secret = ""; console.log("Leaving debug mode!"); }
     if (window.location.hostname == "127.0.0.1" || debug) {
         if (ev.key == " ") {
             data.mana = data.max_mana;
+        }
+        else if (ev.key == "R") {
+            localStorage.clear();
+            window.location.reload();
         }
     }
 })

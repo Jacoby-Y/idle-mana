@@ -1,3 +1,7 @@
+# 0.7.2
+- Started foundation for card inventory viewing system
+- A little bit of quality of life
+
 # 0.7.1
 - added a little bit of spice to the title sequence
 - remembered to add version info this time around
