@@ -7,7 +7,7 @@ data.last_max = get_or("last_max", 0); defaults.last_max = 0;
 
 const prestige_click = ()=>{
     console.log("prestiging!");
-    if (data.max_mana < 10000 || data.mana < data.max_mana) return;
+    if (data.max_mana < 10000) return;
     data.prest_cost += 5000;
 
     card_wrapper.style.opacity = "1";
@@ -25,11 +25,10 @@ const prestige_click = ()=>{
     prest_cin = true;
 
     setTimeout(() => {
-        if (data.last_max < data.max_mana) {
-            data.lapis += Math.floor(data.max_mana/10000);
-        } else {
-            data.lapis += Math.ceil(data.upgr1_lvl/5);
-        }
+        if (data.last_max < data.max_mana) data.lapis += Math.floor(data.max_mana/400);
+        else data.lapis += Math.floor(data.max_mana/1000);
+
+        data.last_max = data.max_mana;
         
         do_prestige();
 
@@ -45,6 +44,12 @@ const prestige_click = ()=>{
 }
 const do_prestige = ()=>{
     toggle_tip(false);
+
+    spells[0].style.display = "none";
+    spells[1].style.display = "none";
+    spells[2].style.display = "none";
+    // spells[3].style.display = "none";
+    // spells[4].style.display = "none";
 
     for (const key in defaults) {
         if (Object.hasOwnProperty.call(defaults, key)) {

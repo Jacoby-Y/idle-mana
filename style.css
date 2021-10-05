@@ -281,13 +281,21 @@ body {
     justify-content: center;
     align-content: center;
 }
-#cine-txt {
+.cine-txt {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
     font-size: 1.5rem;
     color: white;
     opacity: 0;
     transition-duration: 1s;
     transition-timing-function: linear;
     text-align: center;
+}
+.cine-txt span {
+    opacity: 0;
+    transition-duration: 0.3s;
 }
 #run-cine {
     background-image: url("./assets/cine.svg");

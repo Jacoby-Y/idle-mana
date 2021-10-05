@@ -28,26 +28,31 @@ data.upgr3_lvl = get_or("upgr3_lvl", 0); defaults.upgr3_lvl = 0;
 check_funcs.upgr3 = (v)=>{return true};
 
 data.upgr4 = get_or("upgr4", 0); defaults.upgr4 = 0;
-data.upgr4_cost = get_or("upgr4_cost", data.max_mana); defaults.upgr4 = data.max_mana;
-data.upgr4_lvl = get_or("upgr4_lvl", 0); defaults.upgr4 = 0;
+data.upgr4_cost = get_or("upgr4_cost", 500); defaults.upgr4_cost = 500;
+data.upgr4_lvl = get_or("upgr4_lvl", 0); defaults.upgr4_lvl = 0;
 check_funcs.upgr4 = (v)=>{return true};
 
 
 menu_funcs.upgr0_click = ()=>{
     data.upgr0_cost = Math.round(data.upgr0_cost*1.2);
+    on_poppup_open["upgrade-temp"]();
 }
 menu_funcs.upgr1_click = ()=>{
     data.upgr1_cost = Math.round(data.upgr1_cost*1.2);
+    on_poppup_open["upgrade-temp"]();
 }
 menu_funcs.upgr2_click = ()=>{
     data.upgr2_cost = Math.round(data.upgr2_cost*1.2);
+    on_poppup_open["upgrade-temp"]();
 }
 menu_funcs.upgr3_click = ()=>{
     data.upgr3_cost = Math.round(data.upgr3_cost*1.2);
+    on_poppup_open["upgrade-temp"]();
     data.hold_time = Math.round((1000 * (1/(data.upgr3_lvl+1)))+400)-data.upgr3_lvl*5;
 }
 menu_funcs.upgr4_click = ()=>{
     data.max_mana = Math.round(data.max_mana*1.5/100)*100;
-    data.upgr4_cost = data.max_mana;
+    on_poppup_open["upgrade-temp"](); set_points(shown_points());
+    data.upgr4_cost = data.max_mana/2;
     data.mana = data.mana;
 }

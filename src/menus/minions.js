@@ -49,39 +49,30 @@ check_funcs.minion5 = (v)=>{return true}
 menu_funcs.minion0_click = ()=>{
     data.minion0_cost = Math.round(data.minion0_cost*1.2);
     const next_st = $(".minion-btn")[1].style;
-    if (data.minion0_lvl >= 25 && next_st.display != "block") {
-        next_st.display = "block";
-    }
+    on_poppup_open["minion-temp"]();
 }
 menu_funcs.minion1_click = ()=>{
     data.minion1_cost = Math.round(data.minion1_cost*1.2);
     const next_st = $(".minion-btn")[2].style;
-    if (data.minion1_lvl >= 25 && next_st.display != "block") {
-        next_st.display = "block";
-    }
+    on_poppup_open["minion-temp"]();
 }
 menu_funcs.minion2_click = ()=>{
     data.minion2_cost = Math.round(data.minion2_cost*1.2);
     const next_st = $(".minion-btn")[3].style;
-    if (data.minion2_lvl >= 25 && next_st.display != "block") {
-        next_st.display = "block";
-    }
+    on_poppup_open["minion-temp"]();
 }
 menu_funcs.minion3_click = ()=>{
     data.minion3_cost = Math.round(data.minion3_cost*1.2);
     const next_st = $(".minion-btn")[4].style;
-    if (data.minion3_lvl >= 25 && next_st.display != "block") {
-        next_st.display = "block";
-    }
+    on_poppup_open["minion-temp"]();
 }
 menu_funcs.minion4_click = ()=>{
     data.minion4_cost = Math.round(data.minion4_cost*1.2);
     const next_st = $(".minion-btn")[5].style;
-    if (data.minion4_lvl >= 25 && next_st.display != "block") {
-        next_st.display = "block";
-    }
+    on_poppup_open["minion-temp"]();
 }
 menu_funcs.minion5_click = ()=>{
     data.minion5_cost = Math.round(data.minion5_cost*1.2);
-    
+    on_poppup_open["minion-temp"]();
+    set_points(shown_points());
 }

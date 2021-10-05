@@ -12,42 +12,65 @@ window.onresize = ()=>{
     set_points(shown_points());
     set_spells();
 }
+const run_timeline = (tl, i=0, sec=true)=>{
+    setTimeout(() => {
+        tl[i].run();
+        if (i+1 >= tl.length) return;
+        run_timeline(tl, i+1)
+    }, (sec)? tl[i].time*1000 : tl[i].time);
+}
+const new_time_point = (run, time)=>{
+    return { run: run, time: time  };
+}
 const do_cine = ()=>{
     // console.log("running cinematic");
     cine.style.pointerEvents = "auto";
-    cine_txt.style.opacity = "0";
-    cine_txt.innerText = "";
-    setTimeout(() => {
-        cine_txt.innerText = "Jacoby Productions presents";
-        cine_txt.style.opacity = "1";
-        setTimeout(() => {
-            cine_txt.style.opacity = "0";
-            setTimeout(() => {
-                cine_txt.innerText = "A game made with love";
-                cine_txt.style.opacity = "1";
-                setTimeout(() => {
-                    cine_txt.style.opacity = "0";
-                    setTimeout(() => {
-                        cine_txt.innerText = "[ insert epic name here ]";
-                        cine_txt.style.opacity = "1";
-                        setTimeout(() => {
-                            cine_txt.style.opacity = "0";
-                            setTimeout(() => {
-                                cine.style.opacity = "0";
-                                setTimeout(() => {
-                                    cine.style.pointerEvents = "none";
-                                }, 1000);
-                            }, 2000);
-                        }, 2000);
-                    }, 2000);
-                }, 3000);
-            }, 2000);
-        }, 3000);
-    }, 1000);
+    const timeline = [
+        new_time_point(()=>{
+            cine_txt[1].style.opacity = "1";
+            cine_txt[1].children[0].style.opacity = "1";
+        }, 2),
+        new_time_point(()=>{ cine_txt[1].children[1].style.opacity = "1";}, 0.1),
+        new_time_point(()=>{ cine_txt[1].children[2].style.opacity = "1";}, 0.1),
+        new_time_point(()=>{ cine_txt[1].children[0].style.opacity = "0";}, 2),
+        new_time_point(()=>{ cine_txt[1].children[1].style.opacity = "0";}, 0.1),
+        new_time_point(()=>{ cine_txt[1].children[2].style.opacity = "0";}, 0.1),
+
+        // Show 3rd h3. show "An"
+        new_time_point(()=>{ cine_txt[2].style.opacity = "1"; cine_txt[2].children[0].style.opacity = "1";}, 2),
+        // show "idle"
+        new_time_point(()=>{ cine_txt[2].children[1].style.opacity = "1";}, 0.1),
+        // show "game"
+        new_time_point(()=>{ cine_txt[2].children[2].style.opacity = "1";}, 0.1),
+        new_time_point(()=>{ cine_txt[2].style.opacity = "0";}, 1),
+
+        // show "about"
+        new_time_point(()=>{ cine_txt[2].style.opacity = "1"; cine_txt[2].children[4].style.opacity = "1";}, 1),
+        // show "magic"
+        new_time_point(()=>{ cine_txt[2].children[5].style.opacity = "1";}, 0.1),
+        new_time_point(()=>{ cine_txt[2].style.opacity = "0";}, 1.33),
+        
+        // show "that"
+        new_time_point(()=>{ cine_txt[2].style.opacity = "1"; cine_txt[2].children[7].style.opacity = "1";}, 1),
+        // show "works"
+        new_time_point(()=>{ cine_txt[2].children[8].style.opacity = "1";}, 0.1),
+        new_time_point(()=>{ cine_txt[2].style.opacity = "0";}, 1.66),
+        
+        // show "I"
+        new_time_point(()=>{ cine_txt[2].style.opacity = "1"; cine_txt[2].children[10].style.opacity = "1";}, 1),
+        // show "think"
+        new_time_point(()=>{ cine_txt[2].children[11].style.opacity = "1";}, 0.1),
+        new_time_point(()=>{ cine_txt[2].style.opacity = "0";}, 2),
+        // close it off
+        new_time_point(()=>{ cine.style.opacity = "0"; }, 2),
+        new_time_point(()=>{ cine.style.pointerEvents = "none"; }, 1),
+    ];
+    run_timeline(timeline)
 }
 const load_site = (url)=>{
     window.open(url, '_blank').focus();
 }
+
 
 $("#version").innerText = VERSION;
 data.version = get_or("version", VERSION);
@@ -66,9 +89,7 @@ const save_loop = setInterval(() => {
 }, 5000);
 
 const cine = $("#cinematic");
-const cine_txt = $("#cine-txt");
-
-let no_cine = false;
+const cine_txt = $(".cine-txt");
 
 // console.log($("#run-cine"));
 $("#run-cine").onclick = ()=>{ cine.style.opacity = "1"; do_cine(); }
@@ -84,22 +105,36 @@ if (!local.can_load() || local.get_storage().version == undefined) {
         cine.style.opacity = "0"; 
         cine.style.pointerEvents = "none";
         cine.onclick = null;
+        cine_txt[0].innerText = "";
+        cine_txt[0].style.opacity = "0";
     }
-    setTimeout(() => {
-        if (no_cine) return;
-        cine_txt.innerText = `Welcome back\nOffline earnings: ${total}`;
-        cine_txt.style.opacity = "1";
-        setTimeout(() => {
-            if (no_cine) return;
-            cine_txt.style.opacity = "0";
-            setTimeout(() => {
-                if (no_cine) return;
-                cine.style.opacity = "0";
-                setTimeout(() => {
-                    cine.style.pointerEvents = "none";
-                    cine.onclick = null;
-                }, 1000);
-            }, 1000);
-        }, 2000);
-    }, 1000);
+    cine_txt[0].innerText = `Welcome back\nOffline earnings: ${format_num(total)} ${(data.mana >= data.max_mana)? "(hit max)" : ""}`;
+    cine_txt[0].style.opacity = "1";
 }
+
+if (data.upgr4_lvl >= 2) {
+    $("#minion-point").removeAttribute("hide");
+}
+if (data.minion5_lvl >= 1) {
+    $("#spell-point").removeAttribute("hide");
+    $("#lapis-point").removeAttribute("hide");
+}
+if (data.spell0) $(".spell")[0].style.display = "block";
+if (data.spell1) $(".spell")[1].style.display = "block";
+if (data.spell2) $(".spell")[2].style.display = "block";
+// if (data.spell0) $(".spell")[0].style.display = "block";
+// if (data.spell0) $(".spell")[0].style.display = "block";
+let secret = "";
+let debug = false;
+document.addEventListener("keyup", (ev)=>{
+    secret += ev.key;
+    if (ev.key == "`" || secret.length > 10) secret = "";
+    if (secret == "debug") debug = true;
+    if (secret = "normal") debug = false;
+    if (window.location.hostname == "127.0.0.1" || debug) {
+        if (ev.key == " ") {
+            data.mana = data.max_mana;
+        }
+    }
+})
+

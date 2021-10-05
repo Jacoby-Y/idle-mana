@@ -8,24 +8,24 @@ const format_num = (num, round=true)=>{
     num /= 1000;
 
     if (num < 1000) { 
-        return `${Math.round(num*10)/10}K`
+        return `${num.toFixed(1)}K`
     }
     num /= 1000;
 
     if (num < 1000) {
-        return `${Math.round(num*10)/10}M`;
+        return `${num.toFixed(1)}M`;
     }
     num /= 1000;
 
     if (num < 1000) {
-        return `${Math.round(num*10)/10}T`;
+        return `${num.toFixed(1)}T`;
     }
     num /= 1000;
 
     if (num < 1000) {
-        return `${Math.round(num*10)/10}Q`;
+        return `${num.toFixed(1)}Q`;
     }
-    return `${Math.round(num*10)/10}Q`;
+    return `${num.toFixed(1)}Q`;
 }
 
 let defaults = {};
@@ -41,12 +41,24 @@ data.settings = {
     }},
     lapis: {display: (v) => format_num(v) },
     upgr1_lvl: {display: v => `${v}%`},
+    upgr0_cost: {display: v => format_num(v)},
+    upgr1_cost: {display: v => format_num(v)},
+    upgr2_cost: {display: v => format_num(v)},
+    upgr3_cost: {display: v => format_num(v)},
+    upgr4_cost: {display: v => format_num(v)},
+    minion0_cost: {display: v => format_num(v)},
+    minion1_cost: {display: v => format_num(v)},
+    minion2_cost: {display: v => format_num(v)},
+    minion3_cost: {display: v => format_num(v)},
+    minion4_cost: {display: v => format_num(v)},
+    minion5_cost: {display: v => format_num(v)},
+    prest_cost: {display: v => format_num(v)},
     spell0_cost: {display(v){ if (data.spell0) {return "~"} return v }},
     spell1_cost: {display(v){ if (data.spell1) {return "~"} return v }},
     spell2_cost: {display(v){ if (data.spell2) {return "~"} return v }},
     spell3_cost: {display(v){ if (data.spell3) {return "~"} return v }},
     spell4_cost: {display(v){ if (data.spell4) {return "~"} return v }},
-    prest_cost: { display(v){ console.log("set prest"); return `${format_num(v)}` } },
+    prest_cost: { display(v){ return `${format_num(v)}` } },
 }
 
 data.max_mana = get_or("max_mana", 1000); defaults.max_mana = 1000;

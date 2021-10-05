@@ -33,12 +33,16 @@ const set_points = (pts, i=0)=>{
         }
         const d = window.innerHeight/4;
         const sq = 0.5;
-        const off = -2;
+        const arc = 0.4;
         const len = pts.length;
-        // const a = ((off / points.length) * i+((off/(points.length))-(off/(points.length*2)))); 
-        const a = ((off / len) * i+((off/(len))-(off/(len*2)))); 
-        const x = Math.cos(a-(off/2))*d;
-        const y = Math.sin(a-(off/2))*d;
+        const off = -(0.01 * len);
+        const pi2 = Math.PI;
+        const a = -((i*arc)-((len-1)*0.5*arc));
+        // console.log(a);
+        const x = Math.cos(a+off)*d;
+        const y = Math.sin(a+off)*d;
+
+        // console.log((i*arc)-((len-1))/(Math.PI/2));
 
         pts[i].style.display = "block";
         pts[i].style.left = `${o.x-x}px`;
@@ -48,7 +52,7 @@ const set_points = (pts, i=0)=>{
 
         i++;
         if (i < len) set_points(pts, i);
-    }, 500/(pts.length));
+    }, 500/(pts.length+1));
 }
 const clear_points = (pts, i)=>{
     // console.log(pts);

@@ -1,3 +1,8 @@
+# 0.7
+- Game is now (hopefully) in working condition
+- Added cinematic timeline functionality
+- Upgraded intro sequence
+
 # 0.6.3
 - Fixed version issue from last update
 
