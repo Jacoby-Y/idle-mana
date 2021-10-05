@@ -1,3 +1,7 @@
+# 0.7.1
+- added a little bit of spice to the title sequence
+- remembered to add version info this time around
+
 # 0.7
 - Game is now (hopefully) in working condition
 - Added cinematic timeline functionality

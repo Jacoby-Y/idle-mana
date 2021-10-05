@@ -1,4 +1,4 @@
-const VERSION = "v0.6.3";
+const VERSION = "v0.7.1";
 
 document.body.onclick = (e)=>{
     if (e.target == document.body) {
@@ -37,7 +37,7 @@ const do_cine = ()=>{
         new_time_point(()=>{ cine_txt[1].children[2].style.opacity = "0";}, 0.1),
 
         // Show 3rd h3. show "An"
-        new_time_point(()=>{ cine_txt[2].style.opacity = "1"; cine_txt[2].children[0].style.opacity = "1";}, 2),
+        new_time_point(()=>{ cine_txt[2].style.opacity = "1"; cine_txt[2].children[0].style.opacity = "1";}, 1),
         // show "idle"
         new_time_point(()=>{ cine_txt[2].children[1].style.opacity = "1";}, 0.1),
         // show "game"
@@ -60,9 +60,17 @@ const do_cine = ()=>{
         new_time_point(()=>{ cine_txt[2].style.opacity = "1"; cine_txt[2].children[10].style.opacity = "1";}, 1),
         // show "think"
         new_time_point(()=>{ cine_txt[2].children[11].style.opacity = "1";}, 0.1),
-        new_time_point(()=>{ cine_txt[2].style.opacity = "0";}, 2),
+        // show "?"
+        new_time_point(()=>{ cine_txt[2].children[12].style.opacity = "1";}, 1),
+        new_time_point(()=>{ cine_txt[2].style.opacity = "0";}, 1),
         // close it off
-        new_time_point(()=>{ cine.style.opacity = "0"; }, 2),
+        new_time_point(()=>{ 
+            cine.style.opacity = "0"; 
+            for (let i = 0; i < cine_txt[2].children.length; i++) {
+                const ch = cine_txt[2].children[i];
+                ch.style.opacity = "0";
+            }
+        }, 2),
         new_time_point(()=>{ cine.style.pointerEvents = "none"; }, 1),
     ];
     run_timeline(timeline)
