@@ -419,8 +419,13 @@ body {
     pointer-events: none;
 }
 #card-holder {
-    width: 10rem;
-    height: 10rem;
+    width: max-content;
+    height: max-content;
     border: 5px solid #121212;
     border-bottom: 5px solid rgb(146, 85, 28);
+    padding: 0 0.5rem;
+}
+#card-holder .flip-card {
+    float: left;
+    margin: 1rem 0.5rem;
 }

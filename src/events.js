@@ -1,4 +1,4 @@
-const VERSION = "v0.7.2";
+const VERSION = "v0.7.3";
 
 document.body.onclick = (e)=>{
     if (e.target == document.body) {
@@ -120,13 +120,7 @@ if (!local.can_load() || local.get_storage().version == undefined) {
     cine_txt[0].style.opacity = "1";
 }
 
-if (data.upgr4_lvl >= 2) {
-    $("#minion-point").removeAttribute("hide");
-}
-if (data.minion5_lvl >= 1) {
-    $("#spell-point").removeAttribute("hide");
-    $("#lapis-point").removeAttribute("hide");
-}
+
 const check_cards = ()=>{
     for (const key in data.cards) {
         if (Object.hasOwnProperty.call(data.cards, key)) {
@@ -136,10 +130,19 @@ const check_cards = ()=>{
     }
     return false;
 }
-if (check_cards()) {
-    $("#card-inv-point").removeAttribute("hide");
+const setup_menu_points = ()=>{
+    if (data.upgr4_lvl >= 2) {
+        $("#minion-point").removeAttribute("hide");
+    }
+    if (data.minion5_lvl >= 1) {
+        $("#spell-point").removeAttribute("hide");
+        $("#lapis-point").removeAttribute("hide");
+    }
+    if (check_cards()) {
+        $("#card-inv-point").removeAttribute("hide");
+    }
 }
-
+setup_menu_points();
 
 if (data.spell0) $(".spell")[0].style.display = "block";
 if (data.spell1) $(".spell")[1].style.display = "block";
@@ -162,5 +165,18 @@ document.addEventListener("keyup", (ev)=>{
             window.location.reload();
         }
     }
+    // if (card_inv.style.opacity == "1") {
+    //     if (ev.key == "Escape") {
+    //         console.log("escaping...");
+    //         card_inv.style.opacity == "0";
+    //         card_inv.style.pointerEvents = "none";
+    //     }
+    //     if (ev.key == "ArrowLeft") {
+    //         card_inv.scrollLeft += 10;
+    //         console.log("arrow left");
+    //     } else if (ev.key == "ArrowRight") {
+    //         card_inv.scrollLeft -= 10;
+    //     }
+    // }
 })
 

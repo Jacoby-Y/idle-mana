@@ -1,3 +1,6 @@
+# 0.7.3
+- Continued foundation for card viewing menu
+
 # 0.7.2
 - Started foundation for card inventory viewing system
 - A little bit of quality of life

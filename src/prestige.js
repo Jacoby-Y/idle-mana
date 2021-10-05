@@ -59,4 +59,5 @@ const do_prestige = ()=>{
     }
 
     local.store();
+    setup_menu_points();
 }

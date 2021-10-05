@@ -6,8 +6,8 @@
 */
 
 class Card {
-    constructor() {
-        this.card = rand_card();
+    constructor(card) {
+        this.card = card;
         // this.html = `<div class="card"> <div class="card-content"> <div class="card-img" style="background-image: url(${this.card.url});"></div> <h3 class="card-desc">${this.card.desc}</h3></div> </div>`;
         
         this.html = `<div class="flip-card" onclick="flip_card(this)">
@@ -66,7 +66,7 @@ const buy_card = (type)=>{
             cards_up = 3;
             card_wrapper.style.gridTemplateColumns = "auto auto auto";
             for (let i = 0; i < 3; i++) {
-                const new_card = new Card();
+                const new_card = new Card(rand_card());
                 store_card(new_card.card.id);
                 card_wrapper.insertAdjacentHTML("beforeend", new_card.html);
             }
@@ -75,7 +75,7 @@ const buy_card = (type)=>{
             cards_up = 6;
             card_wrapper.style.gridTemplateColumns = "auto auto auto";
             for (let i = 0; i < 6; i++) {
-                const new_card = new Card();
+                const new_card = new Card(rand_card());
                 store_card(new_card.card.id);
                 card_wrapper.insertAdjacentHTML("beforeend", new_card.html);
             }
@@ -84,7 +84,7 @@ const buy_card = (type)=>{
             cards_up = 10;
             card_wrapper.style.gridTemplateColumns = "auto auto auto auto auto";
             for (let i = 0; i < 10; i++) {
-                const new_card = new Card();
+                const new_card = new Card(rand_card());
                 store_card(new_card.card.id);
                 card_wrapper.insertAdjacentHTML("beforeend", new_card.html);
             }
@@ -134,27 +134,6 @@ const flip_card = (card)=>{
     }
 }
 
-const get_coord = (elem)=>{ // crossbrowser version
-    let box = elem.getBoundingClientRect();
-
-    let body = document.body;
-    let docEl = document.documentElement;
-
-    let scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop;
-    let scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft;
-
-    let clientTop = docEl.clientTop || body.clientTop || 0;
-    let clientLeft = docEl.clientLeft || body.clientLeft || 0;
-
-    // let top  = box.top +  scrollTop - clientTop;
-    // let left = box.left + scrollLeft - clientLeft;
-
-    let top  = box.top - clientTop;
-    let left = box.left - clientLeft;  
-
-    return { top: Math.round(top), left: Math.round(left) };
-}
-
 card_wrapper.onclick = function(){
     if (prest_cin) return;
     if (cards_up == 0) {
@@ -167,10 +146,12 @@ card_wrapper.onclick = function(){
 
     const fcards = $(".flip-card");
     const card_objs = [];
+    const x_push = 20;
+    const y_push = -10;
     
     for (let i = 0; i < fcards.length; i++) {
         const st = fcards[i].style;
-        card_objs.push( {elem: fcards[i], x: 0, y: 0, vect: { x: 10+( Math.floor(Math.random()*10)-2 ), y: -10+( Math.floor(Math.random()*20)-2 ) }} )
+        card_objs.push( {elem: fcards[i], x: 0, y: 0, vect: { x: 10+( Math.floor(Math.random()*x_push)-2 ), y: -10+( Math.floor(Math.random()*y_push)-10 ) }} )
         st.transform = `translate(${0}px, ${0}px)`;
     }
 
