@@ -1,3 +1,7 @@
+# 0.7.4
+- More quality of life changes
+- Started foundation for more card packs
+
 # 0.7.3
 - Continued foundation for card viewing menu
 

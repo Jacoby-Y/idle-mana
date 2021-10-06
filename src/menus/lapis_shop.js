@@ -26,7 +26,7 @@ class Card {
 const card_wrapper = $("#card-wrapper");
 
 const con_card = (weight, id, title, desc, url)=>{ return { weight: weight, id: id, title: title, desc: desc, url: url } }
-const cards = [
+const card_loot0 = [ // General Card Pack
     con_card(20, "upgr0", "Midas Touch", "Gives a bonus to your clicking abilities", "./assets/cards/upgr0.svg"),
     con_card(5, "upgr1", "Lightning Conduit", "Critical clicks are more powerful", "./assets/cards/upgr1.svg"),
     con_card(7, "upgr2", "Double Time", "Gives a bonus to your manual idle abilities", "./assets/cards/upgr2.svg"),
@@ -39,13 +39,56 @@ const cards = [
     con_card(1, "minion5", "Dragonium Mana", "Dragon minions are more effective", "./assets/cards/minion5.svg"),
     con_card(1, "lapis0", "Magic Mastery", "Get extra lapis after prestige", "./assets/cards/lapis0.svg"),
 ];
+const card_loot1 = [ // Upgrade Card Pack
+    con_card(10, "upgr0", "Midas Touch", "Gives a bonus to your clicking abilities", "./assets/cards/upgr0.svg"),
+    con_card(4, "upgr1", "Lightning Conduit", "Critical clicks are more powerful", "./assets/cards/upgr1.svg"),
+    con_card(10, "upgr2", "Double Time", "Gives a bonus to your manual idle abilities", "./assets/cards/upgr2.svg"),
+    con_card(5, "upgr3", "Rhythmic Strike", "Gives a chance to get a critical when you manually idle", "./assets/cards/upgr3.svg"),
+];
+const card_loot2 = [ // Minion Card Pack
+    con_card(11, "minion0", "Undead Lord", "Zombie minions are more effective", "./assets/cards/minion0.svg"),
+    con_card(9, "minion1", "Hydration", "Aquatic minions are more effective", "./assets/cards/minion1.svg"),
+    con_card(7, "minion2", "Filling Meal", "Beast minion are more effective", "./assets/cards/minion2.svg"),
+    con_card(5, "minion3", "Ectoplasm", "Ghostly minions are more effective", "./assets/cards/minion3.svg"),
+    con_card(3, "minion4", "Tasty Stones", "Rock golem minions are more effective", "./assets/cards/minion4.svg"),
+    con_card(1, "minion5", "Dragonium Mana", "Dragon minions are more effective", "./assets/cards/minion5.svg"),
+];
+const card_loot3 = [ // Epic Card Pack
+    // con_card(20, "upgr0", "Midas Touch", "Gives a bonus to your clicking abilities", "./assets/cards/upgr0.svg"),
+    con_card(5, "upgr1", "Lightning Conduit", "Critical clicks are more powerful", "./assets/cards/upgr1.svg"),
+    con_card(5, "upgr2", "Double Time", "Gives a bonus to your manual idle abilities", "./assets/cards/upgr2.svg"),
+    con_card(5, "upgr3", "Rhythmic Strike", "Gives a chance to get a critical when you manually idle", "./assets/cards/upgr3.svg"),
+    // con_card(15, "minion0", "Undead Lord", "Zombie minions are more effective", "./assets/cards/minion0.svg"),
+    // con_card(9, "minion1", "Hydration", "Aquatic minions are more effective", "./assets/cards/minion1.svg"),
+    con_card(5, "minion2", "Filling Meal", "Beast minion are more effective", "./assets/cards/minion2.svg"),
+    con_card(4, "minion3", "Ectoplasm", "Ghostly minions are more effective", "./assets/cards/minion3.svg"),
+    con_card(3, "minion4", "Tasty Stones", "Rock golem minions are more effective", "./assets/cards/minion4.svg"),
+    con_card(3, "minion5", "Dragonium Mana", "Dragon minions are more effective", "./assets/cards/minion5.svg"),
+    con_card(3, "lapis0", "Magic Mastery", "Get extra lapis after prestige", "./assets/cards/lapis0.svg"),
+];
 
 const cards_default = { "upgr0": 0, "upgr1": 0, "upgr2": 0, "upgr3": 0, "minion0": 0, "minion1": 0, "minion2": 0, "minion3": 0, "minion4": 0, "minion5": 0, "lapis0": 0 };
 data.cards = get_or("cards", cards_default); // defaults.cards = cards_default;
 data.lapis = get_or("lapis", 0); // defaults.lapis = 0;
-data.card0_cost = get_or("card0_cost", 10); defaults.card0_cost = 10;
-data.card1_cost = get_or("card1_cost", 18); defaults.card1_cost = 18;
-data.card2_cost = get_or("card2_cost", 25); defaults.card2_cost = 25;
+data.card0_cost = get_or("card0_cost", 10); defaults.card0_cost = 10; // 3
+data.card1_cost = get_or("card1_cost", 18); defaults.card1_cost = 18; // 6
+data.card2_cost = get_or("card2_cost", 25); defaults.card2_cost = 25; // 10
+
+// Upgrades Card Pack
+data.card3_cost = get_or("card3_cost", 15); defaults.card3_cost = 15; // 6
+data.card4_cost = get_or("card4_cost", 25); defaults.card4_cost = 25; // 10
+
+// Minion Card Pack
+data.card5_cost = get_or("card5_cost", 25); defaults.card5_cost = 25; // 6
+data.card6_cost = get_or("card6_cost", 45); defaults.card6_cost = 45; // 10
+
+// Epic Card Pack
+data.card7_cost = get_or("card7_cost", 100); defaults.card7_cost = 100; // 3
+data.card8_cost = get_or("card8_cost", 200); defaults.card8_cost = 200; // 6
+data.card9_cost = get_or("card9_cost", 450); defaults.card9_cost = 450; // 10
+
+// data.card10_cost = get_or("card10_cost", ); defaults.card10_cost = ;
+// data.card11_cost = get_or("card11_cost", ); defaults.card11_cost = ;
 
 let cards_up = 0;
 
@@ -108,15 +151,15 @@ const store_card = (id)=>{
 const rand_card = ()=>{
     let max = 1;
 
-    for (let i = 0; i < cards.length; i++) {
-        const c = cards[i];
+    for (let i = 0; i < card_loot0.length; i++) {
+        const c = card_loot0[i];
         max += c.weight;
     }
 
     let num = Math.floor(Math.random()*max);
 
-    for (let i = 0; i < cards.length; i++) {
-        const c = cards[i];
+    for (let i = 0; i < card_loot0.length; i++) {
+        const c = card_loot0[i];
         num -= c.weight;
 
         if (num <= 0) {
@@ -141,8 +184,6 @@ card_wrapper.onclick = function(){
         return;
     }
     if (cards_up >= 0) return;
-    
-    
 
     const fcards = $(".flip-card");
     const card_objs = [];

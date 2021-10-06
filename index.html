@@ -19,9 +19,9 @@
     
     <script defer src="./src/minion.js"></script>
     <script defer src="./src/tool_tips.js"></script>
-    <script defer src="./src/events.js"></script>
-
     <script defer src="./src/prestige.js"></script>
+
+    <script defer src="./src/events.js"></script>
 
     <link rel="stylesheet" href="./style.css">
     <title>Mana Idler!</title>
@@ -66,9 +66,7 @@
 
     <h3 id="version" onclick="load_site('https://github.com/Jacoby-Y/idle-mana')">version</h3>
 
-    <div id="card-inventory">
-        <div id="card-holder"></div>
-    </div>
+    <div id="card-inventory"> <div id="card-holder"></div> </div>
 
     <div id="loading"></div>
     <!-- <img id="loading" src="./assets/loading.svg" alt="Loading"> -->
@@ -86,8 +84,9 @@
         </div>
     </template>
     <template id="minion-temp">
-        <div id="poppup-content" style="padding: 10px; width: auto;">
+        <div id="poppup-content" style="padding: 10px; width: auto; position: relative;">
             <h2 style="color: white; text-align: center; padding: 0.5rem 0.5rem 1.2rem 0.5rem;">-- Minions --</h2>
+            <h3 id="per-sec" watch>Per Sec: {per_sec}</h3>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                 <div class="btn-t1 minion-btn" onclick="clicked_btn('minion0')" onmouseenter="set_tip('minion0')" onmouseleave="toggle_tip()" style="background-image: url(./assets/minion0.svg);"><h3 class="btn-t1-lvl" watch>{minion0_lvl}</h3><h3 class="btn-t1-cost" watch>{minion0_cost}</h3></div>
                 <div class="btn-t1 minion-btn" onclick="clicked_btn('minion1')" onmouseenter="set_tip('minion1')" onmouseleave="toggle_tip()" style="background-image: url(./assets/minion1.svg); display: none;"><h3 class="btn-t1-lvl" watch>{minion1_lvl}</h3><h3 class="btn-t1-cost" watch>{minion1_cost}</h3></div>
@@ -124,9 +123,9 @@
             <h2 id="lapis-txt" watch>{lapis}</h2>
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
                 <div class="btn-t1" onclick="prestige_click()" onmouseenter="set_tip('prest')" onmouseleave="toggle_tip()" style="background-image: url(./assets/prestige0.svg);"><h3 class="btn-t1-lvl" watch>{prest_lvl}</h3><h3 class="btn-t1-cost" watch>{prest_cost}</h3></div>
-                <div class="btn-t1" onclick="buy_card('card0')" onmouseenter="set_tip('card0')" onmouseleave="toggle_tip()" style="background-image: url(./assets/card0.svg);"><h3 class="btn-t1-cost2" watch>{card0_cost}</h3></div>
-                <div class="btn-t1" onclick="buy_card('card1')" onmouseenter="set_tip('card1')" onmouseleave="toggle_tip()" style="background-image: url(./assets/card1.svg);"><h3 class="btn-t1-cost2" watch>{card1_cost}</h3></div>
-                <div class="btn-t1" onclick="buy_card('card2')" onmouseenter="set_tip('card2')" onmouseleave="toggle_tip()" style="background-image: url(./assets/card2.svg);"><h3 class="btn-t1-cost2" watch>{card2_cost}</h3></div>
+                <div class="btn-t1" onclick="buy_card('card0')" onmouseenter="set_tip('card0')" onmouseleave="toggle_tip()" style="background-image: url(./assets/card0.svg);"><h3 class="btn-t1-cost2" watch>{card0_cost}</h3><h4 class="pack-amount">3</h4></div>
+                <div class="btn-t1" onclick="buy_card('card1')" onmouseenter="set_tip('card1')" onmouseleave="toggle_tip()" style="background-image: url(./assets/card0.svg);"><h3 class="btn-t1-cost2" watch>{card1_cost}</h3><h4 class="pack-amount">6</h4></div>
+                <div class="btn-t1" onclick="buy_card('card2')" onmouseenter="set_tip('card2')" onmouseleave="toggle_tip()" style="background-image: url(./assets/card0.svg);"><h3 class="btn-t1-cost2" watch>{card2_cost}</h3><h4 class="pack-amount">10</h4></div>
             </div><!-- set_tip(str: "card", index: 0) // tool_tips[str][index] -->
         </div>
     </template>

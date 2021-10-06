@@ -18,6 +18,11 @@ const format_num = (num, round=true)=>{
     num /= 1000;
 
     if (num < 1000) {
+        return `${num.toFixed(1)}B`;
+    }
+    num /= 1000;
+
+    if (num < 1000) {
         return `${num.toFixed(1)}T`;
     }
     num /= 1000;
@@ -59,6 +64,7 @@ data.settings = {
     spell3_cost: {display(v){ if (data.spell3) {return "~"} return v }},
     spell4_cost: {display(v){ if (data.spell4) {return "~"} return v }},
     prest_cost: { display(v){ return `${format_num(v)}` } },
+    per_sec: { display(v){ return `${format_num(v)}` } }
 }
 
 data.max_mana = get_or("max_mana", 1000); defaults.max_mana = 1000;

@@ -1,9 +1,9 @@
 const loading = $("#loading");
 let prest_cin = false;
 
-data.prest_lvl = get_or("prest_lvl", 0); defaults.prest_lvl = 0; 
+data.prest_lvl = get_or("prest_lvl", 0); 
 data.prest_cost = get_or("prest_cost", 10000);
-data.last_max = get_or("last_max", 0); defaults.last_max = 0; 
+data.last_max = get_or("last_max", 0); 
 
 const prestige_click = ()=>{
     console.log("prestiging!");
@@ -45,6 +45,8 @@ const prestige_click = ()=>{
 const do_prestige = ()=>{
     toggle_tip(false);
 
+    data.prest_lvl++;
+
     spells[0].style.display = "none";
     spells[1].style.display = "none";
     spells[2].style.display = "none";
@@ -57,6 +59,9 @@ const do_prestige = ()=>{
             data[key] = val;
         }
     }
+
+    $("#minion-point").setAttribute("hide", "");
+    $("#spell-point").setAttribute("hide", "");
 
     local.store();
     setup_menu_points();

@@ -129,7 +129,7 @@ body {
     width: max-content; 
     text-align: right;
     cursor: pointer;
-    padding: 0.5rem;
+    padding: 2rem 0.5rem;
     border-radius: 1rem;
     transform: translate(-110%, -35%); 
     transition-duration: 0.3s;
@@ -346,7 +346,16 @@ body {
     padding-top: 10px;
     padding-bottom: 0px;
 }
-
+.pack-amount {
+    /* color: rgb(144, 144, 255); */
+    color: rgb(255, 255, 255);
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 1.7rem;
+    padding-right: 0.3rem;
+    /* background-color: black; */
+}
 
 .flip-card {
     background-color: transparent;
@@ -412,20 +421,49 @@ body {
     transition-duration: 0.5s;
     z-index: 20;
     display: grid;
-    justify-content: center;
+    /* justify-content: center; */
+    justify-items: center;
     align-content: center;
     
     opacity: 0;
     pointer-events: none;
+
+    overflow-x: scroll;
 }
 #card-holder {
     width: max-content;
     height: max-content;
     border: 5px solid #121212;
     border-bottom: 5px solid rgb(146, 85, 28);
-    padding: 0 0.5rem;
+    background-color: #121212;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 0 0;
+    margin: 0 2rem;
 }
 #card-holder .flip-card {
     float: left;
     margin: 1rem 0.5rem;
+}
+.card-amount {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 0.3rem 0.7rem;
+    background-color: #424242;
+    border-top-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+#per-sec {
+    color: white; 
+    position: absolute; 
+    top: -2px; left: 100%; 
+    width: max-content;
+    background-color: #212121;
+    padding: 0.3rem 0.5rem;
+    border: 2px solid aqua;
+    border-left: transparent;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }

@@ -1,4 +1,4 @@
-const VERSION = "v0.7.3";
+const VERSION = "v0.7.4";
 
 document.body.onclick = (e)=>{
     if (e.target == document.body) {
@@ -137,6 +137,9 @@ const setup_menu_points = ()=>{
     if (data.minion5_lvl >= 1) {
         $("#spell-point").removeAttribute("hide");
         $("#lapis-point").removeAttribute("hide");
+    } else if (data.prest_lvl > 0) {
+        $("#lapis-point").removeAttribute("hide");
+
     }
     if (check_cards()) {
         $("#card-inv-point").removeAttribute("hide");

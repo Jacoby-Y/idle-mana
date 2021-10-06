@@ -46,6 +46,9 @@ data.minion5_lvl = get_or("minion5_lvl", 0); defaults.minion5_lvl = 0;
 data.minion5_pow = get_or("minion5_pow", 500); defaults.minion5_pow = 500;
 check_funcs.minion5 = (v)=>{return true}
 
+data.per_sec = get_or("per_sec", 0);
+
+
 menu_funcs.minion0_click = ()=>{
     data.minion0_cost = Math.round(data.minion0_cost*1.2);
     const next_st = $(".minion-btn")[1].style;
