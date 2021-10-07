@@ -19,7 +19,12 @@ const offline_earnings = ()=>{
     return total;
 }
 
+let step = true;
+
 const idle_loop = setInterval(() => {
+    // if (step) step = false;
+    // else return;
+
     const now = Math.round(Date.now()/1000);
     if (now - data.offline >= 10) {
         //: Needs testing for catching up with lost mana when off the tab.
@@ -34,10 +39,12 @@ const idle_loop = setInterval(() => {
         // const card_bonus =  (data.cards[`minion${i}`]>0)? data.cards[`minion${i}`] * 1.05 : 1;
         const card_bonus = 1+(data.cards[`minion${i}`] * 0.05)
         total += add * spell2_mult * card_bonus;
+        // console.log(`minion${i}. add: ${add}, spell2_mult: ${spell2_mult}, card_bonus: ${card_bonus}`);
         if (isNaN(card_bonus) || isNaN(add)) console.log(`minion${i} is having problems!`);
     }
 
-    data.per_sec = total;
+    data.per_sec = total*4;
+    // console.log(total);
 
     if (data.mana + total > data.max_mana) data.mana = data.max_mana;
     else if (data.mana + total < data.max_mana) data.mana += total;

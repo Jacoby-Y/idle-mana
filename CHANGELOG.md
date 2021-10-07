@@ -1,3 +1,8 @@
+# 0.7.5
+- reverted foundation for more card packs (for now)
+- started foundation for outer game loop
+- Told the story of who you play as in readme.md (til further notice)
+
 # 0.7.4
 - More quality of life changes
 - Started foundation for more card packs

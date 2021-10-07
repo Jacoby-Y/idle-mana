@@ -1,4 +1,4 @@
-const VERSION = "v0.7.4";
+const VERSION = "v0.7.5";
 
 document.body.onclick = (e)=>{
     if (e.target == document.body) {
@@ -100,7 +100,7 @@ const cine = $("#cinematic");
 const cine_txt = $(".cine-txt");
 
 // console.log($("#run-cine"));
-$("#run-cine").onclick = ()=>{ cine.style.opacity = "1"; do_cine(); }
+if ($("#run-cine") != null) $("#run-cine").onclick = ()=>{ cine.style.opacity = "1"; do_cine(); }
 
 if (!local.can_load() || local.get_storage().version == undefined) {
     localStorage.clear();
