@@ -1,3 +1,7 @@
+# 0.8
+- Restuctured entire src folder
+- Added new, post prestige area
+
 # 0.7.5
 - reverted foundation for more card packs (for now)
 - started foundation for outer game loop

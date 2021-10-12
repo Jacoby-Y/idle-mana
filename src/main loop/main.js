@@ -1,4 +1,5 @@
-const mana_orb = $("#mana-orb");
+// const mana_orb = $("#mana-orb");
+const body = cui.get("body").css("background-color", "#212121");
 
 const format_num = (num, round=true)=>{
     if (num < 1000) {
@@ -38,13 +39,14 @@ let defaults = {};
 data.settings = {
     mana: {display(v) {
         if (v >= data.max_mana) {
-            mana_orb.style.border = "2px solid rgb(238, 89, 89)";
+            // mana_orb.style.border = "2px solid rgb(238, 89, 89)";
+            return `${format_num(data.max_mana)} / ${format_num(data.max_mana)}`;
         } else {
-            mana_orb.style.border = "none";
+            // mana_orb.style.border = "none";
+            return `${format_num(v)} / ${format_num(data.max_mana)}`;
         }
-        return `${format_num(v)} / ${format_num(data.max_mana)}`;
     }},
-    lapis: {display: (v) => format_num(v) },
+    lapis: {display: (v) => { /*console.log(`Lapis: ${v}`);*/ return format_num(v)} },
     upgr1_lvl: {display: v => `${v}%`},
     upgr0_cost: {display: v => format_num(v)},
     upgr1_cost: {display: v => format_num(v)},
@@ -64,7 +66,8 @@ data.settings = {
     spell3_cost: {display(v){ if (data.spell3) {return "~"} return v }},
     spell4_cost: {display(v){ if (data.spell4) {return "~"} return v }},
     prest_cost: { display(v){ return `${format_num(v)}` } },
-    per_sec: { display(v){ return `${format_num(v)}` } }
+    per_sec: { display(v){ return `${format_num(v)}` } },
+    printer_cost: { display(v){ return (data.printer)? "~" : format_num(v) } },
 }
 
 data.max_mana = get_or("max_mana", 1000); defaults.max_mana = 1000;

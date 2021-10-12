@@ -74,6 +74,9 @@ data.card0_cost = get_or("card0_cost", 10); defaults.card0_cost = 10; // 3
 data.card1_cost = get_or("card1_cost", 18); defaults.card1_cost = 18; // 6
 data.card2_cost = get_or("card2_cost", 25); defaults.card2_cost = 25; // 10
 
+data.printer = get_or("printer", false);
+data.printer_cost = get_or("printer_cost", 2000); // defaults.printer_cost = 2000; 
+
 // // Upgrades Card Pack
 // data.card3_cost = get_or("card3_cost", 15); defaults.card3_cost = 15; // 6
 // data.card4_cost = get_or("card4_cost", 25); defaults.card4_cost = 25; // 10
@@ -91,6 +94,7 @@ data.card2_cost = get_or("card2_cost", 25); defaults.card2_cost = 25; // 10
 // data.card11_cost = get_or("card11_cost", ); defaults.card11_cost = ;
 
 let cards_up = 0;
+let flipping_cards = false;
 
 const buy_card = (type)=>{
     // while (card_wrapper.firstChild) { card_wrapper.removeChild(card_wrapper.firstChild); }
@@ -132,6 +136,8 @@ const buy_card = (type)=>{
                 card_wrapper.insertAdjacentHTML("beforeend", new_card.html);
             }
         }
+        flipping_cards = true;
+        $("#card-tip").style.opacity = "1";
     }, 1000);
 }
 const store_card = (id)=>{
@@ -176,9 +182,32 @@ const flip_card = (card)=>{
         st.transform = "rotateY(180deg)";
     }
 }
+const buy_printer = ()=>{
+    // console.log(`${data.lapis} >= ${data.printer_cost} && ${!data.printer}`);
+    if (data.lapis >= data.printer_cost && !data.printer) {
+        data.lapis -= data.printer_cost;
+        data.printer = true;
+        $("#printer-point").removeAttribute("hide");
+        style_shown_points();
+    }
+}
+const go_to_shop = ()=>{
+    const st = $("#main-wrapper").style;
+    st.transform = "translate(100%, 0)";
+    st.pointerEvents = "none";
+    $("#shop-wrapper").style.transform = "translate(0,0)";
+    setTimeout(() => {
+        st.display = "none";
+        $("#shop-wrapper").style.display = "grid";
+        setTimeout(() => {
+            $("#shop-wrapper").style.opacity = "1";
+        }, 10);
+    }, 1000);
+}
 
+let in_sim = false;
 card_wrapper.onclick = function(){
-    if (prest_cin) return;
+    if (prest_cin || in_sim) return;
     if (cards_up == 0) {
         cards_up--; 
         return;
@@ -195,6 +224,8 @@ card_wrapper.onclick = function(){
         card_objs.push( {elem: fcards[i], x: 0, y: 0, vect: { x: 10+( Math.floor(Math.random()*x_push)-2 ), y: -10+( Math.floor(Math.random()*y_push)-10 ) }} )
         st.transform = `translate(${0}px, ${0}px)`;
     }
+
+    in_sim = true;
 
     const grav = 2;
     const drag = 0.98;
@@ -217,6 +248,11 @@ card_wrapper.onclick = function(){
         clearInterval(simulation_loop);
         this.style.opacity = "0";
         this.style.pointerEvents = "none";
-        while (card_wrapper.firstChild) { card_wrapper.removeChild(card_wrapper.firstChild); }
+        // while (card_wrapper.firstChild) { card_wrapper.removeChild(card_wrapper.firstChild); }
+        while (document.getElementsByClassName("flip-card")[0]) {
+            document.getElementsByClassName("flip-card")[0].parentElement.removeChild(document.getElementsByClassName("flip-card")[0])
+        }
+        in_sim = false;
+        flipping_cards = false;
     }, 2500);
 }

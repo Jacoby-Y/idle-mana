@@ -51,8 +51,8 @@ menu_funcs.upgr3_click = ()=>{
     data.hold_time = Math.round((1000 * (1/(data.upgr3_lvl+1)))+400)-data.upgr3_lvl*5;
 }
 menu_funcs.upgr4_click = ()=>{
-    data.max_mana = Math.round(data.max_mana*1.5/100)*100;
+    data.max_mana = Math.round(data.max_mana*1.75/100)*100;
     on_poppup_open["upgrade-temp"](); set_points(shown_points());
-    data.upgr4_cost = data.max_mana/2;
+    data.upgr4_cost = Math.round(data.max_mana/3/100)*100;
     data.mana = data.mana;
 }

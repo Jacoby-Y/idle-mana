@@ -30,6 +30,7 @@ const tips = {
     card0: `Buy a pack of 3 cards`,
     card1: `Buy a pack of 6 cards`,
     card2: `Buy a pack of 10 cards`,
+    printer: `Buy a Quantum Manifester, for all your material needs! (at the cost of mana)`
 }
 
 /*
@@ -40,11 +41,24 @@ const tips = {
     spell3: shop discout for # purchases
     spell4: cut spell cooldowns 
 */
-
-const set_tip = (type)=>{
+const search_tip_attr = ()=>{
+    for (const elem of document.body.getElementsByTagName("*")) {
+        if (!elem.hasAttribute("tip-id") || elem.onmouseenter != null) continue;
+        const tip = elem.getAttribute("tip-id");
+        elem.onmouseenter = function() {
+            set_tip(tip, this);
+        }
+    }
+}
+const set_tip = (type="", elem=new HTMLElement())=>{
     // console.log(type);
     if (!tip_out) tip.style.transform = "translate(0, 0)";
     tip_txt.innerText = tips[type];
+    
+    elem.onmouseleave = function() {
+        toggle_tip(false);
+        this.onmouseleave = null;
+    }
 }
 const toggle_tip = (bool=false)=>{
     if (bool) {

@@ -1,9 +1,12 @@
-const card_inv = $("#card-inventory");
-const card_holder = $("#card-holder")
+// const card_inv = $("#card-inventory");
+// const card_holder = $("#card-holder");
 
-card_inv.onclick = ()=>{
-    card_inv.style.opacity = "0";
-    card_inv.style.pointerEvents = "none";
+const card_inv = cui.get("#card-inventory");
+const card_holder = cui.get("#card-holder");
+
+card_inv.elem.onclick = ()=>{
+    card_inv.css("opacity", "0");
+    card_inv.css("pointerEvents", "none");
 }
 
 const card_order = ["upgr0","upgr1", "upgr2", "upgr3", "minion0","minion1","minion2","minion3","minion4","minion5","lapis0"]
@@ -18,16 +21,16 @@ const find_card = (str)=>{
 }
 
 const open_inv = ()=>{
-    card_inv.style.opacity = "1";
-    card_inv.style.pointerEvents = "auto";
+    card_inv.css("opacity", "1");
+    card_inv.css("pointerEvents", "auto");
 
-    while (card_holder.firstChild) { card_holder.removeChild(card_holder.firstChild); }
+    card_holder.abandon();
     
     for (let i = 0; i < card_order.length; i++) {
         const str = card_order[i];
         if (data.cards[str] > 0) {
             const c = find_card(str);
-            card_holder.insertAdjacentHTML("beforeend", 
+            card_holder.elem.insertAdjacentHTML("beforeend", 
             `<div class="flip-card-back" style="transform: rotate(0deg); width: 16rem; height: 25rem; position: relative; float: left; margin: 0.5rem;">
                 <h3 class="card-title" style="text-align: center;">${c.title}</h3>
                 <div class="card-img" style="background-image: url(${c.url});"></div>
@@ -37,5 +40,3 @@ const open_inv = ()=>{
         }
     }
 }
-
-// open_inv();

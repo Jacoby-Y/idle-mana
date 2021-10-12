@@ -10,6 +10,10 @@
 
 const minion_len = 6;
 
+
+if (typeof check_funcs == "undefined") check_funcs = {};
+if (typeof menu_funcs == "undefined") menu_funcs = {};
+
 data.minion0 = get_or("minion0", 0); defaults.minion0 = 0;
 data.minion0_cost = get_or("minion0_cost", 10); defaults.minion0_cost = 10;
 data.minion0_lvl = get_or("minion0_lvl", 0); defaults.minion0_lvl = 0;
